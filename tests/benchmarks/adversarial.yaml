@@ -1,0 +1,80 @@
+# ADVERSARIAL benchmark: written on 2026-10-11 AFTER the hold-out run, by someone who knows how the
+# parsers work, to BREAK them: aliased imports, constants holding algorithm names, library wrappers
+# (Fernet, PyJWT, jsonwebtoken), Go tls.Config, GCP / Azure key exports, and decoys built from the
+# exact patterns the parsers look for. Labelled by reading the files, BEFORE scanning them.
+# Same format and meaning as holdout.yaml.
+dataset: adversarial
+root: adversarial
+assets:
+  - asset: python/payments_gateway.py
+    source: code
+    tier: CRITICAL          # ECDH P-256 key agreement, RS256 (RSA) tokens
+    hndl: true              # the ECDH shared secret becomes the session key
+    algorithms: [secp256r1, ECDH, HKDF, SHA-256, SHA-1, HMAC-MD5,
+                 AES, HMAC-SHA256,      # Fernet = AES-128-CBC + HMAC-SHA256
+                 RSA]                   # jwt.encode(..., algorithm="RS256") = RSA PKCS#1 v1.5 + SHA-256
+    key_sizes: {AES: 128}
+  - asset: java/KeyAgreementService.java
+    source: code
+    tier: CRITICAL
+    hndl: true              # KeyAgreement ECDH
+    algorithms: [secp256r1, ECDH, DESede, SHA256withECDSA, HmacSHA512, insecure-random]   # new Random() for an OTP
+  - asset: go/vpn-gateway/main.go
+    source: code
+    tier: CRITICAL
+    hndl: true              # RSA-OAEP encryption, X25519, TLS suites with RSA / ECDHE key exchange
+    algorithms: [RSA, SHA-256, X25519, ChaCha20-Poly1305, 3DES, MD5,
+                 TLS_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384]
+    key_sizes: {RSA: 3072}
+  - asset: js/session.js
+    source: code
+    tier: CRITICAL
+    hndl: true              # createECDH
+    algorithms: [RSA, SHA-1, AES-256-GCM, prime256v1,
+                 ECDSA, SHA-256]        # jwt.sign(..., {algorithm: 'ES256'}) = ECDSA P-256 + SHA-256
+    key_sizes: {RSA: 2048, AES: 256}
+  - asset: edge.example.lab:443
+    source: config
+    tier: CRITICAL
+    hndl: true              # TLS 1.2 clients get ECDHE without ML-KEM; TLS 1.3 may fall back to plain X25519
+    algorithms: [ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-ECDSA-CHACHA20-POLY1305, X25519MLKEM768, X25519,
+                 TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256, TLS_AES_128_GCM_SHA256]   # OpenSSL TLS 1.3 defaults
+  - asset: admin.example.lab:8443
+    source: config
+    tier: SAFE
+    hndl: false
+    algorithms: [X25519MLKEM768, TLS_AES_256_GCM_SHA384]
+  - asset: ssh/bastion_sshd_config
+    source: config
+    tier: CRITICAL
+    hndl: true              # curve25519-sha256 still offered
+    algorithms: [sntrup761x25519-sha512@openssh.com, curve25519-sha256, ssh-ed25519, aes256-ctr, aes128-ctr,
+                 hmac-sha2-512, umac-128@openssh.com]
+  - asset: projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/doc-signing
+    source: cloud
+    tier: CRITICAL
+    hndl: false
+    algorithms: [P-256, SHA-256]
+  - asset: projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/backup-wrap
+    source: cloud
+    tier: CRITICAL
+    hndl: true              # ASYMMETRIC_DECRYPT: data encrypted to this RSA key can be recorded now
+    algorithms: [RSA, SHA-256]
+    key_sizes: {RSA: 3072}
+  - asset: projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/app-data
+    source: cloud
+    tier: SAFE              # GOOGLE_SYMMETRIC_ENCRYPTION = AES-256-GCM
+    hndl: false
+    algorithms: [AES]
+    key_sizes: {AES: 256}
+  - asset: projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/pq-signing
+    source: cloud
+    tier: SAFE
+    hndl: false
+    algorithms: [ML-DSA-65]
+  - asset: https://acme-vault.vault.azure.net/keys/api-signing/1f2e3d4c5b6a
+    source: cloud
+    tier: CRITICAL
+    hndl: false
+    algorithms: [P-384]
+decoys: [decoys/changelog.js, decoys/AuditLog.java, decoys/hashing_shim.py, decoys/build.go]

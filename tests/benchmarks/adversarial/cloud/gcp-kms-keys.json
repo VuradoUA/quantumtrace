@@ -1,0 +1,27 @@
+[
+  {
+    "name": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/doc-signing",
+    "purpose": "ASYMMETRIC_SIGN",
+    "createTime": "2024-03-01T10:00:00Z",
+    "versionTemplate": {"algorithm": "EC_SIGN_P256_SHA256", "protectionLevel": "HSM"}
+  },
+  {
+    "name": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/backup-wrap",
+    "purpose": "ASYMMETRIC_DECRYPT",
+    "createTime": "2023-06-12T08:30:00Z",
+    "versionTemplate": {"algorithm": "RSA_DECRYPT_OAEP_3072_SHA256", "protectionLevel": "SOFTWARE"}
+  },
+  {
+    "name": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/app-data",
+    "purpose": "ENCRYPT_DECRYPT",
+    "createTime": "2022-01-20T12:00:00Z",
+    "rotationPeriod": "7776000s",
+    "versionTemplate": {"algorithm": "GOOGLE_SYMMETRIC_ENCRYPTION", "protectionLevel": "SOFTWARE"}
+  },
+  {
+    "name": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/pq-signing",
+    "purpose": "ASYMMETRIC_SIGN",
+    "createTime": "2026-02-02T09:00:00Z",
+    "versionTemplate": {"algorithm": "PQ_SIGN_ML_DSA_65", "protectionLevel": "SOFTWARE"}
+  }
+]

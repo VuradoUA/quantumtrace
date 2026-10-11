@@ -1,0 +1,162 @@
+# Hand-verified ground truth for the organisers' starter kit (JunctionX-QuantumTrace/).
+# Verified 2026-10-10 by reading every file / running tshark.
+#
+#   expected    what the final verdict for that asset must be
+#   components  what the parser for that source should report (raw names exactly as
+#               they appear in the input). Phase 1 feeds these straight into the
+#               classifier; Phase 2 checks that the parsers really produce them.
+#   parser_flags  facts only a parser can know (hardcoded key, expired cert, ...)
+#   phase       if set, the entry can only be checked once that parser exists
+
+code:
+  # 1. AES-128-ECB export encryption (hardcoded 16-byte key, insecure RNG for tokens)
+  - {file: python/report_export.py, scenario: aes128-ecb, expected: {tier: MEDIUM, hndl: false, flags: [insecure-mode]},
+     components: [{algorithm: AES, key_size: 128, mode: ecb, usage: encryption}], parser_flags: [hardcoded-key, weak-rng]}
+  - {file: java/BatchExporter.java, scenario: aes128-ecb, expected: {tier: MEDIUM, hndl: false, flags: [insecure-mode]},
+     components: [{algorithm: AES/ECB/PKCS5Padding, key_size: 128, usage: encryption}], parser_flags: [hardcoded-key, weak-rng]}
+  - {file: go/batch-pipeline/main.go, scenario: aes128-ecb, expected: {tier: MEDIUM, hndl: false, flags: [insecure-mode]},
+     components: [{algorithm: AES, key_size: 128, mode: ecb, usage: encryption}], parser_flags: [hardcoded-key, weak-rng, hand-rolled-mode]}
+  # 2. SHA-384 checksum + HMAC-SHA256 tag (decoy: all safe)
+  - {file: python/artifact_manifest.py, scenario: sha384-hmac, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: sha384, usage: hash}, {algorithm: HMAC-SHA256, usage: mac}]}
+  - {file: java/ConfigSync.java, scenario: sha384-hmac, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: SHA-384, usage: hash}, {algorithm: HmacSHA256, usage: mac}]}
+  - {file: go/config-sync/main.go, scenario: sha384-hmac, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: SHA-384, usage: hash}, {algorithm: HMAC-SHA256, usage: mac}]}
+  # 3. MD5 password hashing
+  - {file: python/legacy_accounts.py, scenario: md5-passwords, expected: {tier: MEDIUM, hndl: false, flags: [classically-broken]},
+     components: [{algorithm: md5, usage: hash}], parser_flags: [password-hash]}
+  - {file: java/CustomerDirectory.java, scenario: md5-passwords, expected: {tier: MEDIUM, hndl: false, flags: [classically-broken]},
+     components: [{algorithm: MD5, usage: hash}], parser_flags: [password-hash]}
+  - {file: go/member-directory/main.go, scenario: md5-passwords, expected: {tier: MEDIUM, hndl: false, flags: [classically-broken]},
+     components: [{algorithm: MD5, usage: hash}], parser_flags: [password-hash]}
+  # 4. Ed25519 signatures (modern, but Shor-breakable)
+  - {file: python/webhook_signature.py, scenario: ed25519, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: Ed25519, usage: signature}]}
+  - {file: java/DeviceAttestation.java, scenario: ed25519, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: Ed25519, usage: signature}]}
+  - {file: go/agent-enrollment/main.go, scenario: ed25519, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: Ed25519, usage: signature}]}
+  # 5. PBKDF2-HMAC-SHA256, 600k iterations
+  - {file: python/member_credentials.py, scenario: pbkdf2, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: PBKDF2HMAC, usage: kdf}, {algorithm: SHA256, usage: hash}]}
+  - {file: java/IdentityVault.java, scenario: pbkdf2, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: PBKDF2WithHmacSHA256, usage: kdf}]}
+  - {file: go/auth-gateway/main.go, scenario: pbkdf2, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: PBKDF2, usage: kdf}, {algorithm: HMAC-SHA256, usage: mac}], parser_flags: [hand-rolled-kdf]}
+  # 6. RSA-1024 + SHA-1 (PKCS#1 v1.5) signatures
+  - {file: python/license_token.py, scenario: rsa1024-sha1, expected: {tier: CRITICAL, hndl: false, flags: [weak-key-size, classically-broken]},
+     components: [{algorithm: RSA, key_size: 1024, usage: signature}, {algorithm: SHA1, usage: hash}]}
+  - {file: java/ReceiptSigner.java, scenario: rsa1024-sha1, expected: {tier: CRITICAL, hndl: false, flags: [weak-key-size, classically-broken]},
+     components: [{algorithm: RSA, key_size: 1024, usage: signature}, {algorithm: SHA1withRSA, usage: signature}]}
+  - {file: go/invoice-service/main.go, scenario: rsa1024-sha1, expected: {tier: CRITICAL, hndl: false, flags: [weak-key-size, classically-broken]},
+     components: [{algorithm: RSA, key_size: 1024, usage: signature}, {algorithm: SHA-1, usage: hash}]}
+  # 7. AES-256-GCM transfer encryption
+  - {file: python/secure_transfer.py, scenario: aes256-gcm, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: AESGCM, key_size: 256, mode: gcm, usage: encryption}]}
+  - {file: java/SessionCipher.java, scenario: aes256-gcm, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: AES/GCM/NoPadding, key_size: 256, usage: encryption}]}
+  - {file: go/telemetry-relay/main.go, scenario: aes256-gcm, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: AES, key_size: 256, mode: gcm, usage: encryption}]}
+  # 8. SHA-1 update checksum
+  - {file: python/update_feed.py, scenario: sha1-checksum, expected: {tier: MEDIUM, hndl: false, flags: [classically-broken]},
+     components: [{algorithm: sha1, usage: hash}]}
+  - {file: java/PatchFeed.java, scenario: sha1-checksum, expected: {tier: MEDIUM, hndl: false, flags: [classically-broken]},
+     components: [{algorithm: SHA-1, usage: hash}]}
+  - {file: go/release-feed/main.go, scenario: sha1-checksum, expected: {tier: MEDIUM, hndl: false, flags: [classically-broken]},
+     components: [{algorithm: SHA-1, usage: hash}]}
+
+cloud_kms:
+  - {alias: alias/licensing-jwt-signing, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: RSA_2048, usage: signature}, {algorithm: RSASSA_PKCS1_V1_5_SHA_256, usage: signature}]}
+  - {alias: alias/device-attestation, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: ECC_NIST_P256, usage: signature}, {algorithm: ECDSA_SHA_256, usage: signature}]}
+  - {alias: alias/partner-feed-decrypt, expected: {tier: CRITICAL, hndl: true},
+     components: [{algorithm: RSA_2048, usage: encryption}, {algorithm: RSAES_OAEP_SHA_256, usage: encryption}]}
+  - {alias: alias/s3-object-encryption, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: SYMMETRIC_DEFAULT, usage: encryption}]}
+  - {alias: alias/ebs-volume-encryption, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: SYMMETRIC_DEFAULT, usage: encryption}], parser_flags: [rotation-disabled]}
+  - {alias: alias/internal-ca-root, expected: {tier: CRITICAL, hndl: false, replacement_standard: FIPS 205},
+     components: [{algorithm: ECC_NIST_P384, usage: signature, flags: [long-lived]}, {algorithm: ECDSA_SHA_384, usage: signature, flags: [long-lived]}]}
+  - {alias: alias/legacy-reports-export, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: SYMMETRIC_DEFAULT, usage: encryption}], parser_flags: [pending-deletion, rotation-disabled]}
+  - {alias: alias/hsm-backed-settlement, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: RSA_3072, usage: signature}, {algorithm: RSASSA_PKCS1_V1_5_SHA_384, usage: signature}]}
+  - {alias: alias/release-codesigning, expected: {tier: CRITICAL, hndl: false, replacement_standard: FIPS 205},
+     components: [{algorithm: RSA_4096, usage: signature, flags: [long-lived]}, {algorithm: RSASSA_PSS_SHA_256, usage: signature, flags: [long-lived]}]}
+  - {alias: alias/session-token-encryption, expected: {tier: SAFE, hndl: false},
+     components: [{algorithm: SYMMETRIC_DEFAULT, usage: encryption}]}
+
+cloud_certificates:
+  - {domain: www.example.com, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: RSA_2048, usage: certificate}, {algorithm: SHA256WITHRSA, usage: certificate}], parser_flags: [expiring-soon]}
+  - {domain: admin.internal.example.com, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: EC_prime256v1, usage: certificate}, {algorithm: ECDSA_WITH_SHA256, usage: certificate}]}
+  - {domain: api.example.com, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: RSA_2048, usage: certificate}, {algorithm: SHA256WITHRSA, usage: certificate}]}
+  - {domain: partner-api.example.com, expected: {tier: CRITICAL, hndl: false},
+     components: [{algorithm: EC_secp384r1, usage: certificate}, {algorithm: ECDSA_WITH_SHA384, usage: certificate}]}
+  - {domain: legacy-tcp.internal.example.com, expected: {tier: CRITICAL, hndl: false, flags: [classically-broken]},
+     components: [{algorithm: RSA_2048, usage: certificate}, {algorithm: SHA1WITHRSA, usage: certificate}], parser_flags: [expired, imported, renewal-ineligible]}
+
+cloud_listeners:   # TLS listeners have no `components`: checked end-to-end in test_cloud_parser.py
+  # (Phase 3) no `classically-broken` here: the policy's "-SHA" suites use HMAC-SHA1, which SHA-1 collisions do not break
+  - {listener: public-web-alb:443, policy: ELBSecurityPolicy-2016-08, expected: {tier: CRITICAL, hndl: true, flags: [no-forward-secrecy, tls1.0-enabled, tls1.1-enabled, deprecated]},
+     absent_flags: [classically-broken]}
+  - {listener: public-web-alb:80, expected: {tier: INFO, hndl: false}, parser_flags: [redirect-to-https],
+     components: [{algorithm: plaintext, usage: protocol, flags: [redirect-to-https]}]}
+  - {listener: internal-admin-alb:443, policy: ELBSecurityPolicy-TLS-1-1-2017-01, expected: {tier: CRITICAL, hndl: true, flags: [no-forward-secrecy, tls1.1-enabled]}}
+  - {listener: api-gateway-alb:443, policy: ELBSecurityPolicy-FS-1-2-Res-2020-10, expected: {tier: CRITICAL, hndl: true}, absent_flags: [no-forward-secrecy]}
+  - {listener: partner-api-alb:443, policy: ELBSecurityPolicy-TLS13-1-2-2021-06, expected: {tier: CRITICAL, hndl: true}, absent_flags: [no-forward-secrecy]}
+  - {listener: legacy-tcp-nlb:8443, policy: ELBSecurityPolicy-TLS-1-2-2017-01, expected: {tier: CRITICAL, hndl: true, flags: [no-forward-secrecy]}}
+  - {listener: batch-internal-alb:80, expected: {tier: PLAINTEXT, hndl: false},
+     components: [{algorithm: plaintext, usage: protocol}]}
+
+pcap:
+  - {setup: tls12-static-rsa, sessions: 54, ports: {443: 33, 587: 11, 636: 10},
+     expected: {tier: CRITICAL, hndl: true, flags: [no-forward-secrecy]},
+     components: [{algorithm: TLS_RSA_WITH_AES_128_CBC_SHA, usage: protocol}]}
+  - {setup: tls13-x25519, sessions: 36, ports: {443: 18, 993: 10, 5432: 8},
+     expected: {tier: CRITICAL, hndl: true},
+     components: [{algorithm: TLS_AES_128_GCM_SHA256, usage: protocol}, {algorithm: x25519, usage: key_exchange}]}
+  - {setup: tls13-hybrid-pq, sessions: 7, ports: {443: 7},
+     expected: {tier: SAFE, hndl: false, flags: [hybrid]},
+     components: [{algorithm: TLS_AES_256_GCM_SHA384, usage: protocol}, {algorithm: X25519MLKEM768, usage: key_exchange}]}
+  - {setup: ssh-legacy, sessions: 14, ports: {22: 14},
+     expected: {tier: CRITICAL, hndl: true, flags: [classically-broken]},
+     components: [{algorithm: diffie-hellman-group14-sha1, usage: key_exchange}, {algorithm: ssh-rsa, usage: signature},
+                  {algorithm: aes128-cbc, usage: encryption}, {algorithm: hmac-sha1, usage: mac}],   # MAC verified with tshark 2026-10-11
+     also_offered: [{algorithm: diffie-hellman-group1-sha1, usage: key_exchange}, {algorithm: 3des-cbc, usage: encryption}]}  # weaker options BOTH KEXINITs list (downgrade risk)
+  - {setup: ssh-modern, sessions: 10, ports: {22: 10},
+     expected: {tier: CRITICAL, hndl: true},
+     components: [{algorithm: curve25519-sha256, usage: key_exchange}, {algorithm: rsa-sha2-512, usage: signature},
+                  {algorithm: chacha20-poly1305@openssh.com, usage: encryption}]}
+  - {setup: http-plaintext, sessions: 14, ports: {80: 14},
+     expected: {tier: PLAINTEXT, hndl: false},
+     components: [{algorithm: plaintext, usage: protocol}]}
+
+# Phase 2d: cryptographic libraries declared in the kit's manifests (paths relative to sample-repos/)
+libraries:
+  - {file: python/requirements.txt, library: cryptography, purl: pkg:pypi/cryptography@46.0.5,
+     flags: [no-pqc-api],            # ML-KEM / ML-DSA API only from 48.0.0
+     used_by: [python/license_token.py, python/member_credentials.py, python/report_export.py,
+               python/secure_transfer.py, python/webhook_signature.py]}
+  - {file: go/go.mod, library: stdlib, purl: pkg:golang/stdlib@1.24,
+     flags: [pqc-capable, pq-tls-default],   # go 1.24: crypto/mlkem + X25519MLKEM768 on by default in crypto/tls
+     used_by: [go/agent-enrollment/main.go, go/auth-gateway/main.go, go/batch-pipeline/main.go,
+               go/config-sync/main.go, go/invoice-service/main.go, go/member-directory/main.go,
+               go/release-feed/main.go, go/telemetry-relay/main.go]}
+
+# Phase 3: whole starter kit (cloud + code + manifests + pcap). Regression values of the score formula in
+# quantumtrace/score.py, recomputed by hand in tests/test_score.py::test_kit_score_by_hand.
+scores:
+  kit: {quantum_risk_score: 75.3, by_source: {network: 96.5, code: 47.5, cloud: 81.9}, assets: 183, findings: 416,
+        hndl_assets: 120}
+
+totals:
+  code: {CRITICAL: 6, MEDIUM: 9, SAFE: 9}
+  cloud_kms: {CRITICAL: 6, SAFE: 4}
+  cloud_certificates: {CRITICAL: 5}
+  cloud_listeners: {CRITICAL: 5, INFO: 1, PLAINTEXT: 1}
+  pcap_sessions: {tls: 97, ssh: 24, plaintext: 14}

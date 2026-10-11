@@ -1,0 +1,97 @@
+# Classification benchmark: algorithm names labelled from the CHALLENGE definitions and NIST,
+# written independently of catalog.yaml (do not generate these labels from the tool).
+#   CRITICAL  asymmetric, broken by Shor (RSA, DSA, ECDSA, ECDH, DH, EdDSA, X25519 ...) at ANY key size
+#   MEDIUM    symmetric cipher / hash / MAC weakened by Grover below 256-bit strength (AES-128/192, 3DES, SHA-1, MD5)
+#   SAFE      AES-256 class symmetric, SHA-256 and larger hashes, NIST PQC (FIPS 203/204/205) and PQ hybrids
+#   PLAINTEXT no encryption
+# threat: shor | grover | none.  Policy choices (documented): SHA-256 / HMAC-SHA256 = SAFE; AES-192 = MEDIUM.
+cases:
+  # --- Shor: asymmetric, any size, any spelling
+  - {name: RSA, usage: signature, bits: 1024, tier: CRITICAL, threat: shor}
+  - {name: RSA, usage: encryption, bits: 2048, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: RSA, usage: signature, bits: 4096, tier: CRITICAL, threat: shor}
+  - {name: RSA_3072, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: rsaEncryption, usage: certificate, bits: 2048, tier: CRITICAL, threat: shor}
+  - {name: SHA256withRSA, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: SHA1withRSA, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: RSA/ECB/OAEPWithSHA-256AndMGF1Padding, usage: encryption, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: DSA, usage: signature, bits: 2048, tier: CRITICAL, threat: shor}
+  - {name: SHA256withDSA, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: ECDSA, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: secp256r1, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: prime256v1, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: P-384, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: secp521r1, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: secp256k1, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: ECC_NIST_P256, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: SHA384withECDSA, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: ECDH, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: ECDHE, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: DH, usage: key_exchange, bits: 2048, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: ffdhe4096, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: x25519, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: X448, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: Ed25519, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: Ed448, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: ssh-rsa, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: rsa-sha2-512, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: ssh-ed25519, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: ecdsa-sha2-nistp256, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: curve25519-sha256, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: diffie-hellman-group14-sha256, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: ecdh-sha2-nistp384, usage: key_exchange, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: rsa_pss_rsae_sha256, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: ecdsa_secp256r1_sha256, usage: signature, tier: CRITICAL, threat: shor}
+  - {name: TLS_RSA_WITH_AES_256_GCM_SHA384, usage: protocol, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, usage: protocol, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256, usage: protocol, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, usage: protocol, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: ECDHE-RSA-AES128-GCM-SHA256, usage: protocol, tier: CRITICAL, threat: shor, hndl: true}
+  - {name: RSASSA_PSS_SHA_256, usage: signature, tier: CRITICAL, threat: shor}
+  # --- Grover: symmetric / hashes / MACs below 256-bit strength
+  - {name: AES, usage: encryption, bits: 128, tier: MEDIUM, threat: grover}
+  - {name: AES-128-GCM, usage: encryption, tier: MEDIUM, threat: grover}
+  - {name: AES/ECB/PKCS5Padding, usage: encryption, bits: 128, tier: MEDIUM, threat: grover}
+  - {name: aes192-ctr, usage: encryption, tier: MEDIUM, threat: grover}
+  - {name: aes128-cbc, usage: encryption, tier: MEDIUM, threat: grover}
+  - {name: DESede, usage: encryption, tier: MEDIUM, threat: grover}
+  - {name: 3des-cbc, usage: encryption, tier: MEDIUM, threat: grover}
+  - {name: DES, usage: encryption, tier: MEDIUM, threat: grover}
+  - {name: RC4, usage: encryption, tier: MEDIUM, threat: grover}
+  - {name: Camellia-128-CBC, usage: encryption, tier: MEDIUM, threat: grover}
+  - {name: MD5, usage: hash, tier: MEDIUM, threat: grover}
+  - {name: SHA-1, usage: hash, tier: MEDIUM, threat: grover}
+  - {name: sha1, usage: hash, tier: MEDIUM, threat: grover}
+  - {name: HMAC-SHA1, usage: mac, tier: MEDIUM, threat: grover}
+  - {name: hmac-md5, usage: mac, tier: MEDIUM, threat: grover}
+  - {name: HmacSHA1, usage: mac, tier: MEDIUM, threat: grover}
+  - {name: TLS_AES_128_GCM_SHA256, usage: protocol, tier: MEDIUM, threat: grover}
+  - {name: TLS_AES_128_CCM_SHA256, usage: protocol, tier: MEDIUM, threat: grover}
+  # --- Safe: 256-bit symmetric, big hashes, PQC, PQ hybrids
+  - {name: AES, usage: encryption, bits: 256, tier: SAFE, threat: grover}
+  - {name: AES-256-GCM, usage: encryption, tier: SAFE, threat: grover}
+  - {name: aes256-gcm@openssh.com, usage: encryption, tier: SAFE, threat: grover}
+  - {name: ChaCha20-Poly1305, usage: encryption, tier: SAFE, threat: grover}
+  - {name: chacha20-poly1305@openssh.com, usage: encryption, tier: SAFE, threat: grover}
+  - {name: SYMMETRIC_DEFAULT, usage: encryption, tier: SAFE, threat: grover}
+  - {name: SHA-256, usage: hash, tier: SAFE, threat: grover}
+  - {name: SHA-384, usage: hash, tier: SAFE, threat: grover}
+  - {name: sha512, usage: hash, tier: SAFE, threat: grover}
+  - {name: SHA3-256, usage: hash, tier: SAFE, threat: grover}
+  - {name: HMAC-SHA256, usage: mac, tier: SAFE, threat: grover}
+  - {name: hmac-sha2-512-etm@openssh.com, usage: mac, tier: SAFE, threat: grover}
+  - {name: TLS_AES_256_GCM_SHA384, usage: protocol, tier: SAFE, threat: grover}
+  - {name: TLS_CHACHA20_POLY1305_SHA256, usage: protocol, tier: SAFE, threat: grover}
+  - {name: ML-KEM-768, usage: key_exchange, tier: SAFE, threat: none}
+  - {name: ML-KEM-1024, usage: key_exchange, tier: SAFE, threat: none}
+  - {name: MLKEM768, usage: key_exchange, tier: SAFE, threat: none}
+  - {name: ML-DSA-65, usage: signature, tier: SAFE, threat: none}
+  - {name: ML_DSA_87, usage: signature, tier: SAFE, threat: none}
+  - {name: SLH-DSA-SHA2-128s, usage: signature, tier: SAFE, threat: none}
+  - {name: X25519MLKEM768, usage: key_exchange, tier: SAFE, threat: none}
+  - {name: SecP256r1MLKEM768, usage: key_exchange, tier: SAFE, threat: none}
+  - {name: mlkem768x25519-sha256, usage: key_exchange, tier: SAFE, threat: none}
+  - {name: sntrup761x25519-sha512@openssh.com, usage: key_exchange, tier: SAFE, threat: none}
+  # --- no encryption
+  - {name: plaintext, usage: protocol, tier: PLAINTEXT, threat: none}
+  - {name: TLS_RSA_WITH_NULL_SHA256, usage: protocol, tier: PLAINTEXT, threat: shor}   # no encryption + RSA key exchange

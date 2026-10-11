@@ -1,0 +1,9 @@
+# Bastion host
+Port 22
+PermitRootLogin no
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+KexAlgorithms mlkem768x25519-sha256,curve25519-sha256,diffie-hellman-group14-sha1
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-cbc
+MACs hmac-sha2-256-etm@openssh.com,hmac-sha1
+HostKeyAlgorithms +ssh-rsa

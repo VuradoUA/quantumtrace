@@ -1,0 +1,1112 @@
+# QuantumTrace algorithm catalog: the single source of truth.
+#
+# Parsers report what they SEE (a raw name such as "SHA1withRSA", "RSA_2048",
+# "TLS_RSA_WITH_AES_128_CBC_SHA", "curve25519-sha256"). The classifier resolves
+# that name against this file and decides tier, HNDL exposure, flags, the PQC
+# replacement and the FIPS standard. Adding an algorithm = adding an entry here.
+#
+# Entry fields
+#   name        display name
+#   kind        asymmetric | symmetric | hash | mac | kdf | pqc | hybrid | none
+#   threat      shor (broken by a quantum computer) | grover (weakened) | none
+#   tier        fixed tier (CRITICAL / MEDIUM / SAFE / PLAINTEXT) ...
+#   tier_by_bits  ... or a tier that depends on the key size (symmetric ciphers)
+#   primitive   CycloneDX 1.6 primitive; primitive_by_role overrides it per role
+#   min_bits    asymmetric keys below this are also weak TODAY (flag weak-key-size)
+#   classical_by_bits / classical_level  classical security in bits
+#   nist_level / nist_level_by_bits      NIST quantum security category (0 = broken)
+#   flags       always-on flags (classically-broken, deprecated, hybrid, ...)
+#   oid         object identifier (for the CBOM)
+#   replacement / standard   what to migrate to (asymmetric entries use the
+#               role-based table under `replacements` instead)
+#   aliases     names that mean this algorithm; compared case- and punctuation-
+#               insensitively. A mapping item can also fix bits/mode.
+#   patterns    regexes (on the lowercase name) with optional (?P<bits>) / (?P<mode>)
+
+replacements:
+  # Used for every algorithm with threat: shor, chosen by the role it plays.
+  confidentiality:            # key exchange / key transport / encryption -> HNDL
+    name: ML-KEM-768 (hybrid X25519MLKEM768 for TLS, mlkem768x25519-sha256 for SSH)
+    standard: FIPS 203
+  signature:
+    name: ML-DSA-65
+    standard: FIPS 204
+  long-lived-signature:       # root CAs, code signing, firmware (parser sets flag long-lived)
+    name: SLH-DSA (or ML-DSA-87)
+    standard: FIPS 205
+
+algorithms:
+  # ---------------------------------------------------------------- asymmetric (Shor)
+  RSA:
+    name: RSA
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: pke
+    primitive_by_role: {signature: signature, certificate: signature}
+    min_bits: 2048
+    classical_by_bits: {512: 50, 1024: 80, 2048: 112, 3072: 128, 4096: 140, 7680: 192, 15360: 256}
+    nist_level: 0
+    oid: 1.2.840.113549.1.1.1
+    aliases: [rsa, rsaencryption, rsa-oaep, rsaes-oaep, rsassa-pss, rsa-pss]
+    patterns: ['^rsa[-_ ]?(?P<bits>\d{3,5})$']
+  DSA:
+    name: DSA
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: signature
+    min_bits: 2048
+    flags: [deprecated]
+    nist_level: 0
+    oid: 1.2.840.10040.4.1
+    aliases: [dsa, dss]
+    patterns: ['^dsa[-_ ]?(?P<bits>\d{3,5})$']
+  DH:
+    name: DH
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: key-agree
+    min_bits: 2048
+    classical_by_bits: {1024: 80, 2048: 112, 3072: 128, 4096: 140, 6144: 170, 8192: 192}
+    nist_level: 0
+    oid: 1.2.840.113549.1.3.1
+    aliases: [dh, dhe, ffdh, ffdhe, diffiehellman, diffie-hellman]
+    patterns: ['^ffdhe(?P<bits>\d{4})$', '^(?:dh|modp)[-_ ]?(?P<bits>\d{4})$']
+  ECDH:
+    name: ECDH
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: key-agree
+    nist_level: 0
+    oid: 1.3.132.1.12
+    aliases: [ecdh, ecdhe, ecdh-ephemeral]
+  ECDSA:
+    name: ECDSA
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: signature
+    nist_level: 0
+    oid: 1.2.840.10045.2.1
+    aliases: [ecdsa, ec, id-ecpublickey]
+  EC-P256:
+    name: EC P-256 (secp256r1)
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: key-agree
+    primitive_by_role: {signature: signature, certificate: signature}
+    bits: 256
+    classical_level: 128
+    nist_level: 0
+    oid: 1.2.840.10045.3.1.7
+    aliases: [secp256r1, prime256v1, p-256, p256, nistp256, ecc_nist_p256, ec_prime256v1, ecdsa-p256, ecdh-p256]
+  EC-P384:
+    name: EC P-384 (secp384r1)
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: key-agree
+    primitive_by_role: {signature: signature, certificate: signature}
+    bits: 384
+    classical_level: 192
+    nist_level: 0
+    oid: 1.3.132.0.34
+    aliases: [secp384r1, prime384v1, p-384, p384, nistp384, ecc_nist_p384, ec_secp384r1, ecdsa-p384, ecdh-p384]
+  EC-P521:
+    name: EC P-521 (secp521r1)
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: key-agree
+    primitive_by_role: {signature: signature, certificate: signature}
+    bits: 521
+    classical_level: 256
+    nist_level: 0
+    oid: 1.3.132.0.35
+    aliases: [secp521r1, p-521, p521, nistp521, ecc_nist_p521, ec_secp521r1]
+  EC-SECP256K1:
+    name: EC secp256k1
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: signature
+    bits: 256
+    classical_level: 128
+    nist_level: 0
+    oid: 1.3.132.0.10
+    aliases: [secp256k1, ecc_secg_p256k1]
+  SM2:
+    name: SM2
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: signature
+    nist_level: 0
+    oid: 1.2.156.10197.1.301
+    aliases: [sm2]
+  X25519:
+    name: X25519
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: key-agree
+    bits: 256
+    classical_level: 128
+    nist_level: 0
+    oid: 1.3.101.110
+    aliases: [x25519, curve25519, ecdh-x25519]
+  X448:
+    name: X448
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: key-agree
+    bits: 448
+    classical_level: 224
+    nist_level: 0
+    oid: 1.3.101.111
+    aliases: [x448, curve448]
+  Ed25519:
+    name: Ed25519
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: signature
+    bits: 256
+    classical_level: 128
+    nist_level: 0
+    oid: 1.3.101.112
+    aliases: [ed25519, eddsa]
+  Ed448:
+    name: Ed448
+    kind: asymmetric
+    threat: shor
+    tier: CRITICAL
+    primitive: signature
+    bits: 448
+    classical_level: 224
+    nist_level: 0
+    oid: 1.3.101.113
+    aliases: [ed448]
+
+  # ---------------------------------------------------------------- symmetric (Grover)
+  AES:
+    name: AES
+    kind: symmetric
+    threat: grover
+    tier_by_bits: {128: MEDIUM, 192: MEDIUM, 256: SAFE}
+    primitive: block-cipher
+    classical_by_bits: {128: 128, 192: 192, 256: 256}
+    nist_level_by_bits: {128: 1, 192: 3, 256: 5}
+    oid: 2.16.840.1.101.3.4.1
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases:
+      - aes
+      - rijndael
+      - {name: aesgcm, mode: gcm}                           # Python cryptography AESGCM class
+      - {name: aesccm, mode: ccm}                           # Python cryptography AESCCM class
+      - {name: aesocb3, mode: ocb}
+      - {name: symmetric_default, bits: 256, mode: gcm}     # AWS KMS default key
+      - {name: google_symmetric_encryption, bits: 256, mode: gcm}
+    patterns:
+      - '^aes[-_ ]?(?P<bits>128|192|256)(?:[-_ ]?(?P<mode>cbc|ctr|gcm|ccm|ecb|cfb|ofb|xts|ocb|ccm_8|ccm8))?$'
+  3DES:
+    name: 3DES
+    kind: symmetric
+    threat: grover
+    tier: MEDIUM
+    primitive: block-cipher
+    bits: 168
+    classical_level: 112
+    nist_level: 0
+    flags: [deprecated]
+    oid: 1.2.840.113549.3.7
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases: [3des, tripledes, desede, des-ede3, des3, 3des-ede, tdea]
+    patterns: ['^(?:3des|des-ede3|desede|3des_ede)(?:[-_ ](?P<mode>cbc|ecb))?$']
+  DES:
+    name: DES
+    kind: symmetric
+    threat: grover
+    tier: MEDIUM
+    primitive: block-cipher
+    bits: 56
+    classical_level: 56
+    nist_level: 0
+    flags: [classically-broken]
+    oid: 1.3.14.3.2.7
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases: [des]
+    patterns: ['^des[-_ ](?P<mode>cbc|ecb)$']
+  RC4:
+    name: RC4
+    kind: symmetric
+    threat: grover
+    tier: MEDIUM
+    primitive: stream-cipher
+    nist_level: 0
+    flags: [classically-broken]
+    replacement: AES-256-GCM or ChaCha20-Poly1305
+    standard: FIPS 197
+    aliases: [rc4, arcfour, arc4]
+    patterns: ['^rc4[-_ ]?(?P<bits>40|56|128)$']
+  ChaCha20-Poly1305:
+    name: ChaCha20-Poly1305
+    kind: symmetric
+    threat: grover
+    tier: SAFE
+    primitive: ae
+    bits: 256
+    classical_level: 256
+    nist_level: 5
+    aliases: [chacha20-poly1305, chacha20poly1305, chacha20_poly1305, chacha20]
+  Camellia:
+    name: Camellia
+    kind: symmetric
+    threat: grover
+    tier_by_bits: {128: MEDIUM, 192: MEDIUM, 256: SAFE}
+    primitive: block-cipher
+    nist_level_by_bits: {128: 1, 192: 3, 256: 5}
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases: [camellia]
+    patterns: ['^camellia[-_ ]?(?P<bits>128|192|256)(?:[-_ ]?(?P<mode>cbc|gcm|ctr))?$']
+  ARIA:
+    name: ARIA
+    kind: symmetric
+    threat: grover
+    tier_by_bits: {128: MEDIUM, 192: MEDIUM, 256: SAFE}
+    primitive: block-cipher
+    nist_level_by_bits: {128: 1, 192: 3, 256: 5}
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases: [aria]
+    patterns: ['^aria[-_ ]?(?P<bits>128|192|256)(?:[-_ ]?(?P<mode>cbc|gcm|ctr))?$']
+  # legacy 64-bit-block / national ciphers still found in old TLS + SSH configs
+  Blowfish:
+    name: Blowfish
+    kind: symmetric
+    threat: grover
+    tier: MEDIUM
+    primitive: block-cipher
+    nist_level: 0
+    flags: [deprecated]
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases: [blowfish, bf]
+    patterns: ['^(?:blowfish|bf)[-_ ](?P<mode>cbc|ecb|cfb|ofb)$']
+  CAST5:
+    name: CAST5
+    kind: symmetric
+    threat: grover
+    tier: MEDIUM
+    primitive: block-cipher
+    nist_level: 0
+    flags: [deprecated]
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases: [cast5, cast128, cast-128]
+    patterns: ['^cast(?:5|128)[-_ ](?P<mode>cbc|ecb)$']
+  IDEA:
+    name: IDEA
+    kind: symmetric
+    threat: grover
+    tier: MEDIUM
+    primitive: block-cipher
+    bits: 128
+    nist_level: 0
+    flags: [deprecated]
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases: [idea]
+    patterns: ['^idea[-_ ](?P<mode>cbc|ecb)$']
+  SEED:
+    name: SEED
+    kind: symmetric
+    threat: grover
+    tier: MEDIUM
+    primitive: block-cipher
+    bits: 128
+    nist_level: 1
+    replacement: AES-256-GCM
+    standard: FIPS 197
+    aliases: [seed]
+    patterns: ['^seed[-_ ](?P<mode>cbc|ecb)$']
+
+  # ---------------------------------------------------------------- hashes
+  MD5:
+    name: MD5
+    kind: hash
+    threat: grover
+    tier: MEDIUM
+    primitive: hash
+    nist_level: 0
+    flags: [classically-broken]
+    oid: 1.2.840.113549.2.5
+    replacement: "SHA-256 (for passwords: Argon2id or PBKDF2-HMAC-SHA256)"
+    standard: FIPS 180-4
+    aliases: [md5]
+  SHA-1:
+    name: SHA-1
+    kind: hash
+    threat: grover
+    tier: MEDIUM
+    primitive: hash
+    nist_level: 0
+    flags: [classically-broken]
+    oid: 1.3.14.3.2.26
+    replacement: SHA-256 / SHA-384
+    standard: FIPS 180-4
+    aliases: [sha1, sha-1, sha, sha_1]
+  SHA-224:
+    name: SHA-224
+    kind: hash
+    threat: grover
+    tier: MEDIUM
+    primitive: hash
+    nist_level: 1
+    oid: 2.16.840.1.101.3.4.2.4
+    replacement: SHA-384
+    standard: FIPS 180-4
+    aliases: [sha224, sha-224, sha2-224]
+  SHA-256:
+    name: SHA-256
+    kind: hash
+    threat: grover
+    tier: SAFE
+    primitive: hash
+    nist_level: 2
+    oid: 2.16.840.1.101.3.4.2.1
+    aliases: [sha256, sha-256, sha2-256, sha_256, sha2]
+  SHA-384:
+    name: SHA-384
+    kind: hash
+    threat: grover
+    tier: SAFE
+    primitive: hash
+    nist_level: 4
+    oid: 2.16.840.1.101.3.4.2.2
+    aliases: [sha384, sha-384, sha2-384, sha_384]
+  SHA-512:
+    name: SHA-512
+    kind: hash
+    threat: grover
+    tier: SAFE
+    primitive: hash
+    nist_level: 5
+    oid: 2.16.840.1.101.3.4.2.3
+    aliases: [sha512, sha-512, sha2-512, sha_512]
+  SHA3-256:
+    name: SHA3-256
+    kind: hash
+    threat: grover
+    tier: SAFE
+    primitive: hash
+    nist_level: 2
+    oid: 2.16.840.1.101.3.4.2.8
+    aliases: [sha3-256, sha3_256]
+  SHA3-384:
+    name: SHA3-384
+    kind: hash
+    threat: grover
+    tier: SAFE
+    primitive: hash
+    nist_level: 4
+    oid: 2.16.840.1.101.3.4.2.9
+    aliases: [sha3-384, sha3_384]
+  SHA3-512:
+    name: SHA3-512
+    kind: hash
+    threat: grover
+    tier: SAFE
+    primitive: hash
+    nist_level: 5
+    oid: 2.16.840.1.101.3.4.2.10
+    aliases: [sha3-512, sha3_512]
+
+  BLAKE2b:
+    name: BLAKE2b
+    kind: hash
+    threat: grover
+    tier: SAFE
+    primitive: hash
+    nist_level: 5
+    aliases: [blake2b, blake2b512]
+  BLAKE2s:
+    name: BLAKE2s
+    kind: hash
+    threat: grover
+    tier: SAFE
+    primitive: hash
+    nist_level: 2
+    aliases: [blake2s, blake2s256]
+
+  # ---------------------------------------------------------------- MACs / KDFs
+  HMAC-MD5:
+    name: HMAC-MD5
+    kind: mac
+    threat: grover
+    tier: MEDIUM
+    primitive: mac
+    flags: [deprecated]
+    replacement: HMAC-SHA256
+    standard: FIPS 198-1
+    aliases: [hmac-md5, hmacmd5, hmac_md5]
+  HMAC-SHA1:
+    name: HMAC-SHA1
+    kind: mac
+    threat: grover
+    tier: MEDIUM
+    primitive: mac
+    flags: [deprecated]
+    replacement: HMAC-SHA256
+    standard: FIPS 198-1
+    aliases: [hmac-sha1, hmacsha1, hmac_sha1]
+  HMAC-SHA256:
+    name: HMAC-SHA256
+    kind: mac
+    threat: grover
+    tier: SAFE
+    primitive: mac
+    aliases: [hmac-sha256, hmacsha256, hmac-sha2-256, hmac_256, hmac_sha256]
+  HMAC-SHA384:
+    name: HMAC-SHA384
+    kind: mac
+    threat: grover
+    tier: SAFE
+    primitive: mac
+    aliases: [hmac-sha384, hmacsha384, hmac-sha2-384, hmac_384]
+  HMAC-SHA512:
+    name: HMAC-SHA512
+    kind: mac
+    threat: grover
+    tier: SAFE
+    primitive: mac
+    aliases: [hmac-sha512, hmacsha512, hmac-sha2-512, hmac_512]
+  UMAC:
+    name: UMAC
+    kind: mac
+    threat: grover
+    tier: MEDIUM              # keyed with AES-128 (64- or 128-bit tags): Grover halves it
+    primitive: mac
+    replacement: hmac-sha2-256-etm or an AEAD cipher (AES-256-GCM / ChaCha20-Poly1305)
+    standard: FIPS 198-1
+    aliases: [umac-64, umac-128, umac-64-etm, umac-128-etm]
+  PBKDF2:
+    name: PBKDF2
+    kind: kdf
+    threat: grover
+    tier: SAFE
+    primitive: kdf
+    oid: 1.2.840.113549.1.5.12
+    aliases: [pbkdf2, pbkdf2hmac]
+  HKDF:
+    name: HKDF
+    kind: kdf
+    threat: grover
+    tier: SAFE
+    primitive: kdf
+    aliases: [hkdf]
+  scrypt:
+    name: scrypt
+    kind: kdf
+    threat: grover
+    tier: SAFE
+    primitive: kdf
+    aliases: [scrypt]
+  bcrypt:
+    name: bcrypt
+    kind: kdf
+    threat: grover
+    tier: SAFE
+    primitive: kdf
+    aliases: [bcrypt]
+  Argon2:
+    name: Argon2
+    kind: kdf
+    threat: grover
+    tier: SAFE
+    primitive: kdf
+    aliases: [argon2, argon2id, argon2i, argon2d]
+
+  # ---------------------------------------------------------------- post-quantum (NIST)
+  ML-KEM-512:
+    name: ML-KEM-512
+    kind: pqc
+    threat: none
+    tier: SAFE
+    primitive: kem
+    nist_level: 1
+    oid: 2.16.840.1.101.3.4.4.1
+    standard: FIPS 203
+    aliases: [ml-kem-512, mlkem512, kyber512]
+  ML-KEM-768:
+    name: ML-KEM-768
+    kind: pqc
+    threat: none
+    tier: SAFE
+    primitive: kem
+    nist_level: 3
+    oid: 2.16.840.1.101.3.4.4.2
+    standard: FIPS 203
+    aliases: [ml-kem-768, mlkem768, kyber768, ml-kem]
+  ML-KEM-1024:
+    name: ML-KEM-1024
+    kind: pqc
+    threat: none
+    tier: SAFE
+    primitive: kem
+    nist_level: 5
+    oid: 2.16.840.1.101.3.4.4.3
+    standard: FIPS 203
+    aliases: [ml-kem-1024, mlkem1024, kyber1024]
+  ML-DSA-44:
+    name: ML-DSA-44
+    kind: pqc
+    threat: none
+    tier: SAFE
+    primitive: signature
+    nist_level: 2
+    oid: 2.16.840.1.101.3.4.3.17
+    standard: FIPS 204
+    aliases: [ml-dsa-44, mldsa44, ml_dsa_44, dilithium2]
+  ML-DSA-65:
+    name: ML-DSA-65
+    kind: pqc
+    threat: none
+    tier: SAFE
+    primitive: signature
+    nist_level: 3
+    oid: 2.16.840.1.101.3.4.3.18
+    standard: FIPS 204
+    aliases: [ml-dsa-65, mldsa65, ml_dsa_65, dilithium3, ml-dsa]
+  ML-DSA-87:
+    name: ML-DSA-87
+    kind: pqc
+    threat: none
+    tier: SAFE
+    primitive: signature
+    nist_level: 5
+    oid: 2.16.840.1.101.3.4.3.19
+    standard: FIPS 204
+    aliases: [ml-dsa-87, mldsa87, ml_dsa_87, dilithium5]
+  SLH-DSA:
+    name: SLH-DSA
+    kind: pqc
+    threat: none
+    tier: SAFE
+    primitive: signature
+    nist_level: 1
+    standard: FIPS 205
+    aliases: [slh-dsa, slhdsa, sphincs+, sphincsplus, sphincs]
+    patterns: ['^slh[-_]?dsa[-_].*$']
+  FN-DSA:
+    name: FN-DSA (Falcon)
+    kind: pqc
+    threat: none
+    tier: SAFE
+    primitive: signature
+    flags: [draft-standard]
+    standard: FIPS 206 (draft)
+    aliases: [fn-dsa, falcon, falcon512, falcon1024]
+
+  # ---------------------------------------------------------------- hybrids
+  X25519MLKEM768:
+    name: X25519MLKEM768
+    kind: hybrid
+    threat: none
+    tier: SAFE
+    primitive: kem
+    nist_level: 3
+    flags: [hybrid]
+    standard: FIPS 203
+    aliases: [x25519mlkem768]
+  SecP256r1MLKEM768:
+    name: SecP256r1MLKEM768
+    kind: hybrid
+    threat: none
+    tier: SAFE
+    primitive: kem
+    nist_level: 3
+    flags: [hybrid]
+    standard: FIPS 203
+    aliases: [secp256r1mlkem768]
+  SecP384r1MLKEM1024:
+    name: SecP384r1MLKEM1024
+    kind: hybrid
+    threat: none
+    tier: SAFE
+    primitive: kem
+    nist_level: 5
+    flags: [hybrid]
+    standard: FIPS 203
+    aliases: [secp384r1mlkem1024]
+  MLKEM768-X25519-SSH:
+    name: mlkem768x25519-sha256 (SSH hybrid)
+    kind: hybrid
+    threat: none
+    tier: SAFE
+    primitive: kem
+    nist_level: 3
+    flags: [hybrid]
+    standard: FIPS 203
+    aliases: [mlkem768x25519]
+  SNTRUP761-X25519:
+    name: sntrup761x25519 (SSH hybrid)
+    kind: hybrid
+    threat: none
+    tier: SAFE
+    primitive: kem
+    flags: [hybrid, non-nist-pqc]
+    standard: none (NTRU Prime; migrate to ML-KEM, FIPS 203)
+    aliases: [sntrup761x25519, sntrup761]
+  X25519Kyber768Draft00:
+    name: X25519Kyber768Draft00
+    kind: hybrid
+    threat: none
+    tier: SAFE
+    primitive: kem
+    flags: [hybrid, pre-standard]
+    standard: pre-standard draft (migrate to X25519MLKEM768, FIPS 203)
+    aliases: [x25519kyber768draft00, x25519kyber768, secp256r1kyber768draft00]
+
+  # ---------------------------------------------------------------- randomness
+  INSECURE-RNG:
+    name: Non-cryptographic RNG
+    kind: rng
+    threat: none
+    tier: INFO               # not a quantum issue, but a real classical weakness (flagged weak-rng)
+    primitive: drbg
+    flags: [weak-rng]
+    replacement: "CSPRNG (Python secrets/os.urandom, Java SecureRandom, Go crypto/rand)"
+    standard: NIST SP 800-90A
+    aliases: [insecure-random, insecure-rng, math-rand]
+
+  # ---------------------------------------------------------------- no crypto
+  PLAINTEXT:
+    name: No encryption (plaintext)
+    kind: none
+    threat: none
+    tier: PLAINTEXT
+    primitive: other
+    replacement: TLS 1.3 with X25519MLKEM768 + AES-256-GCM
+    standard: FIPS 203
+    aliases: [plaintext, none, "null", cleartext, http, unencrypted]
+
+# Names made of several algorithms. Keys are compared lowercase, without an
+# "@vendor" suffix. role overrides the finding's usage for that component.
+composites:
+  # --- SSH key exchange
+  diffie-hellman-group1-sha1:          [{alg: DH, bits: 1024, role: key_exchange}, {alg: SHA-1, role: hash}]
+  diffie-hellman-group14-sha1:         [{alg: DH, bits: 2048, role: key_exchange}, {alg: SHA-1, role: hash}]
+  diffie-hellman-group14-sha256:       [{alg: DH, bits: 2048, role: key_exchange}, {alg: SHA-256, role: hash}]
+  diffie-hellman-group16-sha512:       [{alg: DH, bits: 4096, role: key_exchange}, {alg: SHA-512, role: hash}]
+  diffie-hellman-group18-sha512:       [{alg: DH, bits: 8192, role: key_exchange}, {alg: SHA-512, role: hash}]
+  diffie-hellman-group-exchange-sha1:  [{alg: DH, role: key_exchange}, {alg: SHA-1, role: hash}]
+  diffie-hellman-group-exchange-sha256: [{alg: DH, role: key_exchange}, {alg: SHA-256, role: hash}]
+  ecdh-sha2-nistp256:                  [{alg: EC-P256, role: key_exchange}, {alg: SHA-256, role: hash}]
+  ecdh-sha2-nistp384:                  [{alg: EC-P384, role: key_exchange}, {alg: SHA-384, role: hash}]
+  ecdh-sha2-nistp521:                  [{alg: EC-P521, role: key_exchange}, {alg: SHA-512, role: hash}]
+  curve25519-sha256:                   [{alg: X25519, role: key_exchange}, {alg: SHA-256, role: hash}]
+  curve448-sha512:                     [{alg: X448, role: key_exchange}, {alg: SHA-512, role: hash}]
+  sntrup761x25519-sha512:              [{alg: SNTRUP761-X25519, role: key_exchange}, {alg: SHA-512, role: hash}]
+  mlkem768x25519-sha256:               [{alg: MLKEM768-X25519-SSH, role: key_exchange}, {alg: SHA-256, role: hash}]
+  # --- SSH host keys / signatures
+  ssh-rsa:                             [{alg: RSA, role: signature}, {alg: SHA-1, role: hash}]
+  rsa-sha2-256:                        [{alg: RSA, role: signature}, {alg: SHA-256, role: hash}]
+  rsa-sha2-512:                        [{alg: RSA, role: signature}, {alg: SHA-512, role: hash}]
+  ssh-dss:                             [{alg: DSA, role: signature}, {alg: SHA-1, role: hash}]
+  ssh-ed25519:                         [{alg: Ed25519, role: signature}]
+  ssh-ed448:                           [{alg: Ed448, role: signature}]
+  ecdsa-sha2-nistp256:                 [{alg: EC-P256, role: signature}, {alg: SHA-256, role: hash}]
+  ecdsa-sha2-nistp384:                 [{alg: EC-P384, role: signature}, {alg: SHA-384, role: hash}]
+  ecdsa-sha2-nistp521:                 [{alg: EC-P521, role: signature}, {alg: SHA-512, role: hash}]
+  # --- SSH MACs
+  hmac-sha2-256-etm:                   [{alg: HMAC-SHA256, role: mac}]
+  hmac-sha2-512-etm:                   [{alg: HMAC-SHA512, role: mac}]
+  hmac-sha1-etm:                       [{alg: HMAC-SHA1, role: mac}]
+  # --- TLS signature schemes (IANA names)
+  rsa_pkcs1_sha1:                      [{alg: RSA, role: signature}, {alg: SHA-1, role: hash}]
+  rsa_pkcs1_sha256:                    [{alg: RSA, role: signature}, {alg: SHA-256, role: hash}]
+  rsa_pkcs1_sha384:                    [{alg: RSA, role: signature}, {alg: SHA-384, role: hash}]
+  rsa_pkcs1_sha512:                    [{alg: RSA, role: signature}, {alg: SHA-512, role: hash}]
+  rsa_pss_rsae_sha256:                 [{alg: RSA, role: signature}, {alg: SHA-256, role: hash}]
+  rsa_pss_rsae_sha384:                 [{alg: RSA, role: signature}, {alg: SHA-384, role: hash}]
+  rsa_pss_rsae_sha512:                 [{alg: RSA, role: signature}, {alg: SHA-512, role: hash}]
+  rsa_pss_pss_sha256:                  [{alg: RSA, role: signature}, {alg: SHA-256, role: hash}]
+  rsa_pss_pss_sha384:                  [{alg: RSA, role: signature}, {alg: SHA-384, role: hash}]
+  rsa_pss_pss_sha512:                  [{alg: RSA, role: signature}, {alg: SHA-512, role: hash}]
+  ecdsa_secp256r1_sha256:              [{alg: EC-P256, role: signature}, {alg: SHA-256, role: hash}]
+  ecdsa_secp384r1_sha384:              [{alg: EC-P384, role: signature}, {alg: SHA-384, role: hash}]
+  ecdsa_secp521r1_sha512:              [{alg: EC-P521, role: signature}, {alg: SHA-512, role: hash}]
+  ecdsa_sha1:                          [{alg: ECDSA, role: signature}, {alg: SHA-1, role: hash}]
+  ed25519:                             [{alg: Ed25519, role: signature}]
+  ed448:                               [{alg: Ed448, role: signature}]
+  mldsa44:                             [{alg: ML-DSA-44, role: signature}]
+  mldsa65:                             [{alg: ML-DSA-65, role: signature}]
+  mldsa87:                             [{alg: ML-DSA-87, role: signature}]
+
+# Regex families of composite names; {group} is filled from the match.
+composite_patterns:
+  # AWS KMS signing / encryption algorithm names
+  - regex: '^rsassa_(?:pkcs1_v1_5|pss)_sha_(?P<h>1|256|384|512)$'
+    components: [{alg: RSA, role: signature}, {alg: 'SHA-{h}', role: hash}]
+  - regex: '^rsaes_oaep_sha_(?P<h>1|256)$'
+    components: [{alg: RSA, role: encryption}, {alg: 'SHA-{h}', role: hash}]
+  - regex: '^ecdsa_sha_(?P<h>256|384|512)$'
+    components: [{alg: ECDSA, role: signature}, {alg: 'SHA-{h}', role: hash}]
+  # GCP Cloud KMS algorithm names
+  - regex: '^rsa_sign_(?:pkcs1|pss|raw_pkcs1)_(?P<bits>\d{4})(?:_sha(?P<h>256|512))?$'
+    components: [{alg: RSA, bits: '{bits}', role: signature}, {alg: 'SHA-{h}', role: hash, optional: h}]
+  - regex: '^rsa_decrypt_oaep_(?P<bits>\d{4})_sha(?P<h>1|256|512)$'
+    components: [{alg: RSA, bits: '{bits}', role: encryption}, {alg: 'SHA-{h}', role: hash}]
+  - regex: '^ec_sign_p(?P<c>256|384)_sha(?P<h>256|384)$'
+    components: [{alg: 'EC-P{c}', role: signature}, {alg: 'SHA-{h}', role: hash}]
+  - regex: '^ec_sign_secp256k1_sha256$'
+    components: [{alg: EC-SECP256K1, role: signature}, {alg: SHA-256, role: hash}]
+  - regex: '^ec_sign_ed25519$'
+    components: [{alg: Ed25519, role: signature}]
+  - regex: '^pq_sign_ml_dsa_(?P<n>44|65|87)$'
+    components: [{alg: 'ML-DSA-{n}', role: signature}]
+  - regex: '^pq_sign_slh_dsa_.*$'
+    components: [{alg: SLH-DSA, role: signature}]
+  # JOSE / JWT "alg" and "enc" values (RFC 7518): PyJWT, python-jose, jsonwebtoken, jose, nimbus ...
+  - regex: '^(?:rs|ps)(?P<h>256|384|512)$'
+    components: [{alg: RSA, role: signature}, {alg: 'SHA-{h}', role: hash}]
+  - regex: '^es256$'
+    components: [{alg: EC-P256, role: signature}, {alg: SHA-256, role: hash}]
+  - regex: '^es384$'
+    components: [{alg: EC-P384, role: signature}, {alg: SHA-384, role: hash}]
+  - regex: '^es512$'
+    components: [{alg: EC-P521, role: signature}, {alg: SHA-512, role: hash}]
+  - regex: '^es256k$'
+    components: [{alg: EC-SECP256K1, role: signature}, {alg: SHA-256, role: hash}]
+  - regex: '^hs(?P<h>256|384|512)$'
+    components: [{alg: 'HMAC-SHA{h}', role: mac}]
+  - regex: '^rsa-oaep-(?P<h>256|384|512)$'
+    components: [{alg: RSA, role: encryption}, {alg: 'SHA-{h}', role: hash}]
+  - regex: '^rsa1_5$'
+    components: [{alg: RSA, role: encryption}]
+  - regex: '^ecdh-es(?:\+a(?:128|192|256)kw)?$'
+    components: [{alg: ECDH, role: key_exchange}]
+  - regex: '^a(?P<bits>128|192|256)gcm$'
+    components: [{alg: AES, bits: '{bits}', mode: gcm, role: encryption}]
+  - regex: '^a(?P<bits>128|192|256)(?:gcm)?kw$'
+    components: [{alg: AES, bits: '{bits}', role: encryption}]
+  - regex: '^a(?P<bits>128|192|256)cbc-hs(?P<h>256|384|512)$'
+    components: [{alg: AES, bits: '{bits}', mode: cbc, role: encryption}, {alg: 'HMAC-SHA{h}', role: mac}]
+  # PBKDF2 with an explicit PRF, e.g. Java "PBKDF2WithHmacSHA256"
+  - regex: '^pbkdf2with(?P<prf>hmac[a-z0-9]+)$'
+    components: [{alg: PBKDF2, role: kdf}, {alg: '{prf}', role: mac}]
+
+# TLS registries (IANA). Parsers turn wire codepoints into names, then classify the names.
+tls_cipher_suites:
+  0x0004: TLS_RSA_WITH_RC4_128_MD5
+  0x0005: TLS_RSA_WITH_RC4_128_SHA
+  0x000A: TLS_RSA_WITH_3DES_EDE_CBC_SHA
+  0x0016: TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+  0x002F: TLS_RSA_WITH_AES_128_CBC_SHA
+  0x0033: TLS_DHE_RSA_WITH_AES_128_CBC_SHA
+  0x0035: TLS_RSA_WITH_AES_256_CBC_SHA
+  0x0039: TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+  0x003C: TLS_RSA_WITH_AES_128_CBC_SHA256
+  0x003D: TLS_RSA_WITH_AES_256_CBC_SHA256
+  0x009C: TLS_RSA_WITH_AES_128_GCM_SHA256
+  0x009D: TLS_RSA_WITH_AES_256_GCM_SHA384
+  0x009E: TLS_DHE_RSA_WITH_AES_128_GCM_SHA256
+  0x009F: TLS_DHE_RSA_WITH_AES_256_GCM_SHA384
+  0xC009: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+  0xC00A: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+  0xC013: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+  0xC014: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+  0xC023: TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256
+  0xC024: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+  0xC027: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
+  0xC028: TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+  0xC02B: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256
+  0xC02C: TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+  0xC02F: TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+  0xC030: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+  0xCCA8: TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256
+  0xCCA9: TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+  0x1301: TLS_AES_128_GCM_SHA256
+  0x1302: TLS_AES_256_GCM_SHA384
+  0x1303: TLS_CHACHA20_POLY1305_SHA256
+  0x1304: TLS_AES_128_CCM_SHA256
+  0x1305: TLS_AES_128_CCM_8_SHA256
+
+tls_groups:
+  0x0017: secp256r1
+  0x0018: secp384r1
+  0x0019: secp521r1
+  0x001D: x25519
+  0x001E: x448
+  0x0100: ffdhe2048
+  0x0101: ffdhe3072
+  0x0102: ffdhe4096
+  0x0103: ffdhe6144
+  0x0104: ffdhe8192
+  0x0200: MLKEM512
+  0x0201: MLKEM768
+  0x0202: MLKEM1024
+  0x11EB: SecP256r1MLKEM768
+  0x11EC: X25519MLKEM768
+  0x11ED: SecP384r1MLKEM1024
+  0x6399: X25519Kyber768Draft00
+  0x639A: SecP256r1Kyber768Draft00
+
+tls_signature_schemes:
+  0x0201: rsa_pkcs1_sha1
+  0x0203: ecdsa_sha1
+  0x0401: rsa_pkcs1_sha256
+  0x0403: ecdsa_secp256r1_sha256
+  0x0501: rsa_pkcs1_sha384
+  0x0503: ecdsa_secp384r1_sha384
+  0x0601: rsa_pkcs1_sha512
+  0x0603: ecdsa_secp521r1_sha512
+  0x0804: rsa_pss_rsae_sha256
+  0x0805: rsa_pss_rsae_sha384
+  0x0806: rsa_pss_rsae_sha512
+  0x0807: ed25519
+  0x0808: ed448
+  0x0809: rsa_pss_pss_sha256
+  0x080A: rsa_pss_pss_sha384
+  0x080B: rsa_pss_pss_sha512
+  0x0904: mldsa44       # IETF draft codepoint
+  0x0905: mldsa65       # IETF draft codepoint
+  0x0906: mldsa87       # IETF draft codepoint
+
+# ---------------------------------------------------------------------------
+# AWS Elastic Load Balancing TLS security policies.
+# Source: AWS docs "Security policies for your Application/Network Load Balancer"
+# (cipher tables read 2026-10-11). `verified: false` = taken from memory because
+# that part of the doc page could not be retrieved; double-check before relying on it.
+# pq_groups: hybrid key exchange groups the policy offers (AWS "-PQ-" policies).
+# Every policy also offers classical ECDHE key exchange.
+aws_elb_policies:
+  ELBSecurityPolicy-2016-08:
+    tls_versions: ["1.0", "1.1", "1.2"]
+    ciphers: &legacy18
+      [ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-RSA-AES128-GCM-SHA256, ECDHE-ECDSA-AES128-SHA256,
+       ECDHE-RSA-AES128-SHA256, ECDHE-ECDSA-AES128-SHA, ECDHE-RSA-AES128-SHA,
+       ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-RSA-AES256-GCM-SHA384, ECDHE-ECDSA-AES256-SHA384,
+       ECDHE-RSA-AES256-SHA384, ECDHE-ECDSA-AES256-SHA, ECDHE-RSA-AES256-SHA,
+       AES128-GCM-SHA256, AES128-SHA256, AES128-SHA, AES256-GCM-SHA384, AES256-SHA256, AES256-SHA]
+  ELBSecurityPolicy-2015-05:
+    tls_versions: ["1.0", "1.1", "1.2"]
+    ciphers: *legacy18
+  ELBSecurityPolicy-TLS-1-1-2017-01:
+    tls_versions: ["1.1", "1.2"]
+    ciphers: *legacy18
+  ELBSecurityPolicy-TLS-1-2-Ext-2018-06:
+    tls_versions: ["1.2"]
+    ciphers: *legacy18
+  ELBSecurityPolicy-TLS-1-2-2017-01:
+    tls_versions: ["1.2"]
+    ciphers:
+      [ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-RSA-AES128-GCM-SHA256, ECDHE-ECDSA-AES128-SHA256,
+       ECDHE-RSA-AES128-SHA256, ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-RSA-AES256-GCM-SHA384,
+       ECDHE-ECDSA-AES256-SHA384, ECDHE-RSA-AES256-SHA384,
+       AES128-GCM-SHA256, AES128-SHA256, AES256-GCM-SHA384, AES256-SHA256]
+  ELBSecurityPolicy-FS-1-2-Res-2020-10:
+    tls_versions: ["1.2"]
+    verified: false
+    ciphers:
+      [ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-RSA-AES128-GCM-SHA256,
+       ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-RSA-AES256-GCM-SHA384]
+  ELBSecurityPolicy-TLS13-1-2-2021-06:
+    tls_versions: ["1.2", "1.3"]
+    ciphers: &tls13_12
+      [TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256,
+       ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-RSA-AES128-GCM-SHA256, ECDHE-ECDSA-AES128-SHA256,
+       ECDHE-RSA-AES128-SHA256, ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-RSA-AES256-GCM-SHA384,
+       ECDHE-ECDSA-AES256-SHA384, ECDHE-RSA-AES256-SHA384]
+  ELBSecurityPolicy-TLS13-1-2-Res-2021-06:
+    tls_versions: ["1.2", "1.3"]
+    ciphers: &tls13_res
+      [TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256,
+       ECDHE-ECDSA-AES128-GCM-SHA256, ECDHE-RSA-AES128-GCM-SHA256,
+       ECDHE-ECDSA-AES256-GCM-SHA384, ECDHE-RSA-AES256-GCM-SHA384]
+  ELBSecurityPolicy-TLS13-1-3-2021-06:
+    tls_versions: ["1.3"]
+    ciphers: &tls13_only [TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256]
+  ELBSecurityPolicy-TLS13-1-2-PQ-2025-09:
+    tls_versions: ["1.2", "1.3"]
+    ciphers: *tls13_12
+    pq_groups: &pq_groups [X25519MLKEM768, SecP256r1MLKEM768, SecP384r1MLKEM1024]
+  ELBSecurityPolicy-TLS13-1-2-Res-PQ-2025-09:
+    tls_versions: ["1.2", "1.3"]
+    ciphers: *tls13_res
+    pq_groups: *pq_groups
+  ELBSecurityPolicy-TLS13-1-3-PQ-2025-09:
+    tls_versions: ["1.3"]
+    ciphers: *tls13_only
+    pq_groups: *pq_groups
+
+# X.509 algorithm OIDs as they appear in certificates (signatureAlgorithm and
+# subjectPublicKeyInfo). Values are names the classifier already understands.
+x509_oids:
+  # signature algorithms
+  1.2.840.113549.1.1.4: MD5withRSA
+  1.2.840.113549.1.1.5: SHA1withRSA
+  1.2.840.113549.1.1.14: SHA224withRSA
+  1.2.840.113549.1.1.11: SHA256withRSA
+  1.2.840.113549.1.1.12: SHA384withRSA
+  1.2.840.113549.1.1.13: SHA512withRSA
+  1.2.840.113549.1.1.10: RSASSA-PSS
+  1.2.840.10045.4.1: SHA1withECDSA
+  1.2.840.10045.4.3.1: SHA224withECDSA
+  1.2.840.10045.4.3.2: SHA256withECDSA
+  1.2.840.10045.4.3.3: SHA384withECDSA
+  1.2.840.10045.4.3.4: SHA512withECDSA
+  1.2.840.10040.4.3: SHA1withDSA
+  2.16.840.1.101.3.4.3.2: SHA256withDSA
+  # public key algorithms
+  1.2.840.113549.1.1.1: RSA
+  1.2.840.10045.2.1: ECDSA          # id-ecPublicKey; the curve comes from namedCurve
+  1.2.840.10040.4.1: DSA
+  1.3.101.110: X25519
+  1.3.101.111: X448
+  1.3.101.112: Ed25519
+  1.3.101.113: Ed448
+  # named curves
+  1.2.840.10045.3.1.7: secp256r1
+  1.3.132.0.34: secp384r1
+  1.3.132.0.35: secp521r1
+  1.3.132.0.10: secp256k1
+  # post-quantum (NIST)
+  2.16.840.1.101.3.4.3.17: ML-DSA-44
+  2.16.840.1.101.3.4.3.18: ML-DSA-65
+  2.16.840.1.101.3.4.3.19: ML-DSA-87
+  # SLH-DSA (FIPS 205): .20-.25 SHA2 128s/128f/192s/192f/256s/256f, .26-.31 the SHAKE variants
+  2.16.840.1.101.3.4.3.20: SLH-DSA
+  2.16.840.1.101.3.4.3.21: SLH-DSA
+  2.16.840.1.101.3.4.3.22: SLH-DSA
+  2.16.840.1.101.3.4.3.23: SLH-DSA
+  2.16.840.1.101.3.4.3.24: SLH-DSA
+  2.16.840.1.101.3.4.3.25: SLH-DSA
+  2.16.840.1.101.3.4.3.26: SLH-DSA
+  2.16.840.1.101.3.4.3.27: SLH-DSA
+  2.16.840.1.101.3.4.3.28: SLH-DSA
+  2.16.840.1.101.3.4.3.29: SLH-DSA
+  2.16.840.1.101.3.4.3.30: SLH-DSA
+  2.16.840.1.101.3.4.3.31: SLH-DSA
+  2.16.840.1.101.3.4.4.1: ML-KEM-512
+  2.16.840.1.101.3.4.4.2: ML-KEM-768
+  2.16.840.1.101.3.4.4.3: ML-KEM-1024
+
+# Cryptographic libraries declared in dependency manifests (requirements.txt,
+# pyproject.toml, Pipfile, go.mod, package.json, pom.xml, build.gradle, Cargo.toml).
+# Libraries are INVENTORY (tier INFO, not scored): the CBOM lists them and the
+# report says whether the declared version can already do post-quantum crypto.
+#   key         "<ecosystem>:<package>"; a '*' matches any suffix (e.g. jjwt-*)
+#   imports     module / package prefixes the code scanner reports as `library`
+#               (links code findings to the manifest that declares the library)
+#   pqc         native  = a post-quantum library (ML-KEM / ML-DSA / SLH-DSA ...)
+#   pqc_since   first version whose API offers ML-KEM / ML-DSA
+#   pq_tls_default_since  first version whose TLS stack uses a hybrid PQ group by default
+#   deprecated  why it should not be used at all (classical problem)
+#   verified    false = version facts from memory, not re-checked (flag pqc-data-unverified)
+libraries:
+  # ---- Python (PyPI)
+  "pypi:cryptography":
+    display: pyca/cryptography
+    imports: [cryptography]
+    pqc_since: "48.0.0"      # checked 2026-10-11: the 48.0.0 wheel generates ML-KEM-768 / ML-DSA-65, the 47.0.0 wheel raises UnsupportedAlgorithm
+    pqc_api: ML-KEM (FIPS 203), ML-DSA (FIPS 204)
+  "pypi:pycryptodome": {imports: [Crypto]}
+  "pypi:pycryptodomex": {imports: [Cryptodome, pycryptodome]}   # the code scanner reports both as "pycryptodome"
+  "pypi:pycrypto":
+    imports: [Crypto, pycryptodome]                            # same Crypto.* API
+    deprecated: "unmaintained since 2013 (last release 2.6.1, CVE-2013-7459); use pyca/cryptography or pycryptodome"
+  "pypi:pyopenssl": {imports: [OpenSSL]}
+  "pypi:rsa": {imports: [rsa]}
+  "pypi:ecdsa": {imports: [ecdsa]}
+  "pypi:pynacl": {imports: [nacl]}
+  "pypi:paramiko": {imports: [paramiko]}
+  "pypi:bcrypt": {imports: [bcrypt]}
+  "pypi:passlib": {imports: [passlib]}
+  "pypi:argon2-cffi": {imports: [argon2]}
+  "pypi:pyjwt": {imports: [jwt]}
+  "pypi:python-jose": {imports: [jose]}
+  "pypi:jwcrypto": {imports: [jwcrypto]}
+  "pypi:m2crypto": {imports: [M2Crypto]}
+  "pypi:tink": {imports: [tink]}
+  "pypi:liboqs-python": {imports: [oqs], pqc: native}
+  "pypi:pqcrypto": {imports: [pqcrypto], pqc: native}
+  "pypi:kyber-py": {imports: [kyber_py], pqc: native}
+  "pypi:dilithium-py": {imports: [dilithium_py], pqc: native}
+  # ---- Go (go.mod). `golang:stdlib` comes from the `go` directive.
+  "golang:stdlib":
+    display: Go standard library (crypto/*)
+    imports: [crypto]
+    pqc_since: "1.24"            # go.dev/doc/go1.24: new crypto/mlkem (ML-KEM-768 / ML-KEM-1024)
+    pqc_api: ML-KEM (FIPS 203) via crypto/mlkem
+    pq_tls_default_since: "1.24" # crypto/tls enables X25519MLKEM768 by default (GODEBUG tlsmlkem); go 1.23 used the X25519Kyber768Draft00 draft
+  "golang:golang.org/x/crypto": {imports: [golang.org/x/crypto]}
+  "golang:github.com/golang-jwt/jwt*": {imports: [github.com/golang-jwt/jwt]}
+  "golang:github.com/go-jose/go-jose*": {imports: [github.com/go-jose/go-jose]}
+  "golang:github.com/protonmail/go-crypto": {imports: [github.com/ProtonMail/go-crypto]}
+  "golang:github.com/cloudflare/circl": {imports: [github.com/cloudflare/circl], pqc: native}
+  "golang:github.com/open-quantum-safe/liboqs-go": {imports: [github.com/open-quantum-safe/liboqs-go], pqc: native}
+  # ---- JavaScript (npm)
+  "npm:node-forge": {}
+  "npm:crypto-js":
+    deprecated: "development discontinued by its maintainer (2023); use the Web Crypto API / node:crypto"
+  "npm:jsonwebtoken": {}
+  "npm:jose": {}
+  "npm:elliptic": {}
+  "npm:tweetnacl": {}
+  "npm:bcrypt": {}
+  "npm:bcryptjs": {}
+  "npm:node-rsa": {}
+  "npm:jsrsasign": {}
+  "npm:openpgp": {}
+  "npm:sshpk": {}
+  "npm:@noble/curves": {}
+  "npm:@noble/hashes": {}
+  "npm:@noble/ciphers": {}
+  "npm:@noble/post-quantum": {pqc: native}
+  # ---- Java (Maven / Gradle: "group:artifact")
+  "maven:org.bouncycastle:bcprov-jdk18on":
+    display: Bouncy Castle provider
+    pqc_since: "1.79"
+    pqc_api: ML-KEM, ML-DSA, SLH-DSA (FIPS 203/204/205)
+    verified: false          # 1.86 confirmed to ship them; the first version is from memory
+  "maven:org.bouncycastle:bcprov-jdk15on":
+    display: Bouncy Castle provider (jdk15on)
+    deprecated: "superseded by the *-jdk18on artifacts (jdk15on stopped at 1.70); no FIPS 203/204 algorithms"
+  "maven:org.bouncycastle:bc*": {display: Bouncy Castle}
+  "maven:com.google.crypto.tink:tink": {}
+  "maven:io.jsonwebtoken:jjwt*": {}
+  "maven:com.nimbusds:nimbus-jose-jwt": {}
+  "maven:org.jasypt:jasypt": {}
+  "maven:org.openquantumsafe:liboqs-java": {pqc: native}
+  # ---- Rust (Cargo)
+  "cargo:ring": {}
+  "cargo:rustls": {}
+  "cargo:openssl": {}
+  "cargo:aws-lc-rs": {}
+  "cargo:rsa": {}
+  "cargo:p256": {}
+  "cargo:p384": {}
+  "cargo:ed25519-dalek": {}
+  "cargo:x25519-dalek": {}
+  "cargo:aes-gcm": {}
+  "cargo:chacha20poly1305": {}
+  "cargo:sha2": {}
+  "cargo:sha1": {}
+  "cargo:md5": {}
+  "cargo:md-5": {}
+  "cargo:ml-kem": {pqc: native}
+  "cargo:ml-dsa": {pqc: native}
+  "cargo:slh-dsa": {pqc: native}
+  "cargo:pqcrypto": {pqc: native}
+  "cargo:oqs": {pqc: native}

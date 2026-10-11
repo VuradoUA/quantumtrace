@@ -1,0 +1,10 @@
+{
+  "name": "sample-frontend",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.19.2",
+    "crypto-js": "^4.2.0",
+    "@noble/post-quantum": "0.2.1",
+    "jsonwebtoken": "9.0.2"
+  }
+}

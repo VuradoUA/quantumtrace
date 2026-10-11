@@ -1,0 +1,6 @@
+# web app dependencies
+requests==2.32.3
+cryptography>=42          # range: may or may not include the ML-KEM API
+pycryptodome==3.20.0
+pycrypto==2.6.1           # legacy module still imported by the old exporter
+liboqs-python==0.10.0

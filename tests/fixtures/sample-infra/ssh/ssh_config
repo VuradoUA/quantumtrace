@@ -1,0 +1,8 @@
+Host legacy-router
+    HostName 10.0.0.1
+    KexAlgorithms +diffie-hellman-group1-sha1
+    Ciphers +3des-cbc
+    HostKeyAlgorithms +ssh-dss
+
+Host *
+    KexAlgorithms -diffie-hellman-group14-sha1

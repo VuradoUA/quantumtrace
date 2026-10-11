@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantumtrace"
+version = "0.1.0"
+description = "Post-quantum cryptography readiness scanner (JunctionX Lisbon 2026)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6.0",
+    # code scanner: official grammars ship inside the wheels (no runtime downloads)
+    "tree-sitter>=0.25",
+    "tree-sitter-python>=0.23",
+    "tree-sitter-java>=0.23",
+    "tree-sitter-go>=0.23",
+    # X.509 certificates and keys (PCAP + certificate files), independent of the tshark version
+    "cryptography>=43",
+    # Phase 3: check every CBOM against the official CycloneDX 1.6 JSON schema (1.6 support since 7.0)
+    "cyclonedx-python-lib[json-validation]>=7.0",
+    # TOML manifests (pyproject.toml, Cargo.toml, Pipfile) on Python 3.10; 3.11+ has tomllib built in
+    "tomli>=1.1; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+# Phase 4 web dashboard (`quantumtrace dashboard`); verified with streamlit 1.52-1.65 and pandas 2.2-3.0 (1.50 lacks altair_chart(width=))
+dashboard = ["streamlit>=1.52", "pandas>=2.2"]
+dev = ["pytest>=8", "streamlit>=1.52", "pandas>=2.2"]
+
+[project.scripts]
+quantumtrace = "quantumtrace.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["quantumtrace*"]
+
+[tool.setuptools.package-data]
+quantumtrace = ["catalog.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

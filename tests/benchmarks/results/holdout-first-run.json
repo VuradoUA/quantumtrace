@@ -1,0 +1,464 @@
+{
+  "as_of": "2026-10-11",
+  "datasets": {
+    "holdout": {
+      "dataset": "holdout",
+      "root": "/tmp/p4/qt/tests/benchmarks/holdout",
+      "files": {
+        "cloud": 1,
+        "code": 8,
+        "config": 1
+      },
+      "all": {
+        "assets": 5,
+        "detection": {
+          "found": 5,
+          "false_assets": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "algorithms": {
+          "tp": 20,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "verdict": {
+          "correct": 5,
+          "accuracy": 1.0,
+          "confusion": {
+            "CRITICAL": {
+              "CRITICAL": 4
+            },
+            "MEDIUM": {
+              "MEDIUM": 1
+            }
+          }
+        },
+        "hndl": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 3,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "key_sizes": {
+          "ok": 3,
+          "total": 4,
+          "accuracy": 0.75
+        },
+        "flags": {
+          "ok": 0,
+          "total": 0,
+          "accuracy": null
+        }
+      },
+      "by_source": {
+        "code": {
+          "assets": 4,
+          "detection": {
+            "found": 4,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 15,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 4,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 3
+              },
+              "MEDIUM": {
+                "MEDIUM": 1
+              }
+            }
+          },
+          "hndl": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 3,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 3,
+            "total": 4,
+            "accuracy": 0.75
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        },
+        "config": {
+          "assets": 1,
+          "detection": {
+            "found": 1,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 1,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 1
+              }
+            }
+          },
+          "hndl": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        }
+      },
+      "rows": [
+        {
+          "dataset": "holdout",
+          "source": "code",
+          "asset": "python/auth_service.py",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA256",
+              "PBKDF2",
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 128,
+              "ok": false
+            },
+            {
+              "family": "RSA",
+              "bits": 2048,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "holdout",
+          "source": "code",
+          "asset": "java/PaymentProcessor.java",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 2048,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "holdout",
+          "source": "code",
+          "asset": "go/token-service/main.go",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ECC",
+              "ML-KEM-768",
+              "SHA-512"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "holdout",
+          "source": "code",
+          "asset": "js/crypto-utils.js",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "MD5",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "holdout",
+          "source": "config",
+          "asset": "billing.example.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ECC",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        }
+      ],
+      "unexpected": [],
+      "decoys": [
+        {
+          "file": "decoys/report_utils.py",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/Notes.java",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/notes.go",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/settings.json",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/menu.js",
+          "ok": true,
+          "false_findings": []
+        }
+      ],
+      "pcap_setups": []
+    }
+  },
+  "skipped": {},
+  "by_source": {
+    "code": {
+      "assets": 4,
+      "detection": {
+        "found": 4,
+        "false_assets": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "algorithms": {
+        "tp": 15,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "verdict": {
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "CRITICAL": {
+            "CRITICAL": 3
+          },
+          "MEDIUM": {
+            "MEDIUM": 1
+          }
+        }
+      },
+      "hndl": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 3,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "key_sizes": {
+        "ok": 3,
+        "total": 4,
+        "accuracy": 0.75
+      },
+      "flags": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      }
+    },
+    "config": {
+      "assets": 1,
+      "detection": {
+        "found": 1,
+        "false_assets": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "algorithms": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "verdict": {
+        "correct": 1,
+        "accuracy": 1.0,
+        "confusion": {
+          "CRITICAL": {
+            "CRITICAL": 1
+          }
+        }
+      },
+      "hndl": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "key_sizes": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      },
+      "flags": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      }
+    }
+  },
+  "all": {
+    "assets": 5,
+    "detection": {
+      "found": 5,
+      "false_assets": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "algorithms": {
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "verdict": {
+      "correct": 5,
+      "accuracy": 1.0,
+      "confusion": {
+        "CRITICAL": {
+          "CRITICAL": 4
+        },
+        "MEDIUM": {
+          "MEDIUM": 1
+        }
+      }
+    },
+    "hndl": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "key_sizes": {
+      "ok": 3,
+      "total": 4,
+      "accuracy": 0.75
+    },
+    "flags": {
+      "ok": 0,
+      "total": 0,
+      "accuracy": null
+    }
+  }
+}

@@ -1,0 +1,781 @@
+{
+  "as_of": "2026-10-11",
+  "datasets": {
+    "adversarial": {
+      "dataset": "adversarial",
+      "root": "/tmp/p4/qt/tests/benchmarks/adversarial",
+      "files": {
+        "cloud": 2,
+        "code": 8,
+        "config": 2
+      },
+      "all": {
+        "assets": 12,
+        "detection": {
+          "found": 8,
+          "false_assets": 6,
+          "precision": 0.5714,
+          "recall": 0.6667
+        },
+        "algorithms": {
+          "tp": 39,
+          "fp": 0,
+          "fn": 14,
+          "precision": 1.0,
+          "recall": 0.7358,
+          "f1": 0.8478
+        },
+        "verdict": {
+          "correct": 8,
+          "accuracy": 0.6667,
+          "confusion": {
+            "CRITICAL": {
+              "CRITICAL": 7,
+              "MISSING": 2
+            },
+            "SAFE": {
+              "SAFE": 1,
+              "MISSING": 2
+            }
+          }
+        },
+        "hndl": {
+          "tp": 6,
+          "fp": 1,
+          "fn": 1,
+          "tn": 4,
+          "precision": 0.8571,
+          "recall": 0.8571
+        },
+        "key_sizes": {
+          "ok": 2,
+          "total": 6,
+          "accuracy": 0.3333
+        },
+        "flags": {
+          "ok": 0,
+          "total": 0,
+          "accuracy": null
+        }
+      },
+      "by_source": {
+        "code": {
+          "assets": 4,
+          "detection": {
+            "found": 4,
+            "false_assets": 2,
+            "precision": 0.6667,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 20,
+            "fp": 0,
+            "fn": 8,
+            "precision": 1.0,
+            "recall": 0.7143,
+            "f1": 0.8333
+          },
+          "verdict": {
+            "correct": 4,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 4
+              }
+            }
+          },
+          "hndl": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 2,
+            "total": 4,
+            "accuracy": 0.5
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        },
+        "cloud": {
+          "assets": 5,
+          "detection": {
+            "found": 1,
+            "false_assets": 4,
+            "precision": 0.2,
+            "recall": 0.2
+          },
+          "algorithms": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 6,
+            "precision": 1.0,
+            "recall": 0.1429,
+            "f1": 0.2501
+          },
+          "verdict": {
+            "correct": 1,
+            "accuracy": 0.2,
+            "confusion": {
+              "CRITICAL": {
+                "MISSING": 2,
+                "CRITICAL": 1
+              },
+              "SAFE": {
+                "MISSING": 2
+              }
+            }
+          },
+          "hndl": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 1,
+            "tn": 3,
+            "precision": 0.0,
+            "recall": 0.0
+          },
+          "key_sizes": {
+            "ok": 0,
+            "total": 2,
+            "accuracy": 0.0
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        },
+        "config": {
+          "assets": 3,
+          "detection": {
+            "found": 3,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 3,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 2
+              },
+              "SAFE": {
+                "SAFE": 1
+              }
+            }
+          },
+          "hndl": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        }
+      },
+      "rows": [
+        {
+          "dataset": "adversarial",
+          "source": "code",
+          "asset": "python/payments_gateway.py",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC",
+              "HKDF",
+              "HMAC-MD5",
+              "SHA-1",
+              "SHA-256"
+            ],
+            "fn": [
+              "AES",
+              "HMAC-SHA256",
+              "RSA"
+            ],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 128,
+              "ok": false
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "code",
+          "asset": "java/KeyAgreementService.java",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "3DES",
+              "ECC",
+              "HMAC-SHA512",
+              "INSECURE-RNG",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "code",
+          "asset": "go/vpn-gateway/main.go",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "3DES",
+              "ChaCha20-Poly1305",
+              "MD5",
+              "RSA",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [
+              "AES",
+              "ECC",
+              "HMAC-SHA1",
+              "SHA-384"
+            ],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 3072,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "code",
+          "asset": "js/session.js",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ECC",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [
+              "SHA-256"
+            ],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": true
+            },
+            {
+              "family": "RSA",
+              "bits": 2048,
+              "ok": false
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "config",
+          "asset": "edge.example.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ChaCha20-Poly1305",
+              "ECC",
+              "SHA-256",
+              "SHA-384",
+              "X25519",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "config",
+          "asset": "admin.example.lab:8443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "config",
+          "asset": "ssh/bastion_sshd_config",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "Ed25519",
+              "HMAC-SHA512",
+              "SHA-256",
+              "SHA-512",
+              "SNTRUP761-X25519",
+              "UMAC",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/doc-signing",
+          "found": false,
+          "tier_true": "CRITICAL",
+          "tier_pred": "MISSING",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": false,
+          "families": {
+            "tp": [],
+            "fn": [
+              "ECC",
+              "SHA-256"
+            ],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/backup-wrap",
+          "found": false,
+          "tier_true": "CRITICAL",
+          "tier_pred": "MISSING",
+          "hndl_true": true,
+          "hndl_pred": false,
+          "tier_ok": false,
+          "families": {
+            "tp": [],
+            "fn": [
+              "RSA",
+              "SHA-256"
+            ],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 3072,
+              "ok": false
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/app-data",
+          "found": false,
+          "tier_true": "SAFE",
+          "tier_pred": "MISSING",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": false,
+          "families": {
+            "tp": [],
+            "fn": [
+              "AES"
+            ],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": false
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/pq-signing",
+          "found": false,
+          "tier_true": "SAFE",
+          "tier_pred": "MISSING",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": false,
+          "families": {
+            "tp": [],
+            "fn": [
+              "ML-DSA-65"
+            ],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "https://acme-vault.vault.azure.net/keys/api-signing/1f2e3d4c5b6a",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        }
+      ],
+      "unexpected": [
+        {
+          "asset": "cloud/gcp-kms-keys.json:$[0].versionTemplate",
+          "source": "cloud",
+          "tier": "CRITICAL",
+          "worst": [
+            "ECC",
+            "SHA-256"
+          ]
+        },
+        {
+          "asset": "cloud/gcp-kms-keys.json:$[1].versionTemplate",
+          "source": "cloud",
+          "tier": "CRITICAL",
+          "worst": [
+            "RSA",
+            "SHA-256"
+          ]
+        },
+        {
+          "asset": "cloud/gcp-kms-keys.json:$[2].versionTemplate",
+          "source": "cloud",
+          "tier": "SAFE",
+          "worst": [
+            "AES"
+          ]
+        },
+        {
+          "asset": "cloud/gcp-kms-keys.json:$[3].versionTemplate",
+          "source": "cloud",
+          "tier": "SAFE",
+          "worst": [
+            "ML-DSA-65"
+          ]
+        }
+      ],
+      "decoys": [
+        {
+          "file": "decoys/changelog.js",
+          "ok": false,
+          "false_findings": [
+            "md5 @ decoys/changelog.js:2",
+            "sha1 @ decoys/changelog.js:2",
+            "des-ede3-cbc @ decoys/changelog.js:2"
+          ]
+        },
+        {
+          "file": "decoys/AuditLog.java",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/hashing_shim.py",
+          "ok": false,
+          "false_findings": [
+            "sha1 @ decoys/hashing_shim.py:17"
+          ]
+        },
+        {
+          "file": "decoys/build.go",
+          "ok": true,
+          "false_findings": []
+        }
+      ],
+      "pcap_setups": []
+    }
+  },
+  "skipped": {},
+  "by_source": {
+    "code": {
+      "assets": 4,
+      "detection": {
+        "found": 4,
+        "false_assets": 2,
+        "precision": 0.6667,
+        "recall": 1.0
+      },
+      "algorithms": {
+        "tp": 20,
+        "fp": 0,
+        "fn": 8,
+        "precision": 1.0,
+        "recall": 0.7143,
+        "f1": 0.8333
+      },
+      "verdict": {
+        "correct": 4,
+        "accuracy": 1.0,
+        "confusion": {
+          "CRITICAL": {
+            "CRITICAL": 4
+          }
+        }
+      },
+      "hndl": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 0,
+        "tn": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "key_sizes": {
+        "ok": 2,
+        "total": 4,
+        "accuracy": 0.5
+      },
+      "flags": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      }
+    },
+    "cloud": {
+      "assets": 5,
+      "detection": {
+        "found": 1,
+        "false_assets": 4,
+        "precision": 0.2,
+        "recall": 0.2
+      },
+      "algorithms": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 6,
+        "precision": 1.0,
+        "recall": 0.1429,
+        "f1": 0.2501
+      },
+      "verdict": {
+        "correct": 1,
+        "accuracy": 0.2,
+        "confusion": {
+          "CRITICAL": {
+            "MISSING": 2,
+            "CRITICAL": 1
+          },
+          "SAFE": {
+            "MISSING": 2
+          }
+        }
+      },
+      "hndl": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1,
+        "tn": 3,
+        "precision": 0.0,
+        "recall": 0.0
+      },
+      "key_sizes": {
+        "ok": 0,
+        "total": 2,
+        "accuracy": 0.0
+      },
+      "flags": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      }
+    },
+    "config": {
+      "assets": 3,
+      "detection": {
+        "found": 3,
+        "false_assets": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "algorithms": {
+        "tp": 18,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "verdict": {
+        "correct": 3,
+        "accuracy": 1.0,
+        "confusion": {
+          "CRITICAL": {
+            "CRITICAL": 2
+          },
+          "SAFE": {
+            "SAFE": 1
+          }
+        }
+      },
+      "hndl": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0,
+        "tn": 1,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "key_sizes": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      },
+      "flags": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      }
+    }
+  },
+  "all": {
+    "assets": 12,
+    "detection": {
+      "found": 8,
+      "false_assets": 6,
+      "precision": 0.5714,
+      "recall": 0.6667
+    },
+    "algorithms": {
+      "tp": 39,
+      "fp": 0,
+      "fn": 14,
+      "precision": 1.0,
+      "recall": 0.7358,
+      "f1": 0.8478
+    },
+    "verdict": {
+      "correct": 8,
+      "accuracy": 0.6667,
+      "confusion": {
+        "CRITICAL": {
+          "CRITICAL": 7,
+          "MISSING": 2
+        },
+        "SAFE": {
+          "SAFE": 1,
+          "MISSING": 2
+        }
+      }
+    },
+    "hndl": {
+      "tp": 6,
+      "fp": 1,
+      "fn": 1,
+      "tn": 4,
+      "precision": 0.8571,
+      "recall": 0.8571
+    },
+    "key_sizes": {
+      "ok": 2,
+      "total": 6,
+      "accuracy": 0.3333
+    },
+    "flags": {
+      "ok": 0,
+      "total": 0,
+      "accuracy": null
+    }
+  }
+}

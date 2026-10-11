@@ -1,0 +1,6806 @@
+{
+  "as_of": "2026-10-11",
+  "datasets": {
+    "holdout": {
+      "dataset": "holdout",
+      "root": "tests/benchmarks/holdout",
+      "files": {
+        "cloud": 1,
+        "code": 8,
+        "config": 1
+      },
+      "all": {
+        "assets": 5,
+        "detection": {
+          "found": 5,
+          "false_assets": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "algorithms": {
+          "tp": 20,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "verdict": {
+          "correct": 5,
+          "accuracy": 1.0,
+          "confusion": {
+            "CRITICAL": {
+              "CRITICAL": 4
+            },
+            "MEDIUM": {
+              "MEDIUM": 1
+            }
+          }
+        },
+        "hndl": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0,
+          "tn": 3,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "key_sizes": {
+          "ok": 4,
+          "total": 4,
+          "accuracy": 1.0
+        },
+        "flags": {
+          "ok": 0,
+          "total": 0,
+          "accuracy": null
+        }
+      },
+      "by_source": {
+        "code": {
+          "assets": 4,
+          "detection": {
+            "found": 4,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 15,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 4,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 3
+              },
+              "MEDIUM": {
+                "MEDIUM": 1
+              }
+            }
+          },
+          "hndl": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 3,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 4,
+            "total": 4,
+            "accuracy": 1.0
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        },
+        "config": {
+          "assets": 1,
+          "detection": {
+            "found": 1,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 1,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 1
+              }
+            }
+          },
+          "hndl": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        }
+      },
+      "rows": [
+        {
+          "dataset": "holdout",
+          "source": "code",
+          "asset": "python/auth_service.py",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA256",
+              "PBKDF2",
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 128,
+              "ok": true
+            },
+            {
+              "family": "RSA",
+              "bits": 2048,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "holdout",
+          "source": "code",
+          "asset": "java/PaymentProcessor.java",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 2048,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "holdout",
+          "source": "code",
+          "asset": "go/token-service/main.go",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ECC",
+              "ML-KEM-768",
+              "SHA-512"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "holdout",
+          "source": "code",
+          "asset": "js/crypto-utils.js",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "MD5",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "holdout",
+          "source": "config",
+          "asset": "billing.example.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ECC",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        }
+      ],
+      "unexpected": [],
+      "decoys": [
+        {
+          "file": "decoys/report_utils.py",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/Notes.java",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/notes.go",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/settings.json",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/menu.js",
+          "ok": true,
+          "false_findings": []
+        }
+      ],
+      "pcap_setups": []
+    },
+    "adversarial": {
+      "dataset": "adversarial",
+      "root": "tests/benchmarks/adversarial",
+      "files": {
+        "cloud": 2,
+        "code": 8,
+        "config": 2
+      },
+      "all": {
+        "assets": 12,
+        "detection": {
+          "found": 12,
+          "false_assets": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "algorithms": {
+          "tp": 53,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "verdict": {
+          "correct": 12,
+          "accuracy": 1.0,
+          "confusion": {
+            "CRITICAL": {
+              "CRITICAL": 9
+            },
+            "SAFE": {
+              "SAFE": 3
+            }
+          }
+        },
+        "hndl": {
+          "tp": 7,
+          "fp": 0,
+          "fn": 0,
+          "tn": 5,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "key_sizes": {
+          "ok": 6,
+          "total": 6,
+          "accuracy": 1.0
+        },
+        "flags": {
+          "ok": 0,
+          "total": 0,
+          "accuracy": null
+        }
+      },
+      "by_source": {
+        "code": {
+          "assets": 4,
+          "detection": {
+            "found": 4,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 28,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 4,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 4
+              }
+            }
+          },
+          "hndl": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "tn": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 4,
+            "total": 4,
+            "accuracy": 1.0
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        },
+        "cloud": {
+          "assets": 5,
+          "detection": {
+            "found": 5,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 5,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 3
+              },
+              "SAFE": {
+                "SAFE": 2
+              }
+            }
+          },
+          "hndl": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 4,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 2,
+            "total": 2,
+            "accuracy": 1.0
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        },
+        "config": {
+          "assets": 3,
+          "detection": {
+            "found": 3,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 18,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 3,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 2
+              },
+              "SAFE": {
+                "SAFE": 1
+              }
+            }
+          },
+          "hndl": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "tn": 1,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        }
+      },
+      "rows": [
+        {
+          "dataset": "adversarial",
+          "source": "code",
+          "asset": "python/payments_gateway.py",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ECC",
+              "HKDF",
+              "HMAC-MD5",
+              "HMAC-SHA256",
+              "RSA",
+              "SHA-1",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 128,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "code",
+          "asset": "java/KeyAgreementService.java",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "3DES",
+              "ECC",
+              "HMAC-SHA512",
+              "INSECURE-RNG",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "code",
+          "asset": "go/vpn-gateway/main.go",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "3DES",
+              "AES",
+              "ChaCha20-Poly1305",
+              "ECC",
+              "HMAC-SHA1",
+              "MD5",
+              "RSA",
+              "SHA-256",
+              "SHA-384",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 3072,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "code",
+          "asset": "js/session.js",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ECC",
+              "RSA",
+              "SHA-1",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": true
+            },
+            {
+              "family": "RSA",
+              "bits": 2048,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "config",
+          "asset": "edge.example.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ChaCha20-Poly1305",
+              "ECC",
+              "SHA-256",
+              "SHA-384",
+              "X25519",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "config",
+          "asset": "admin.example.lab:8443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "config",
+          "asset": "ssh/bastion_sshd_config",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "Ed25519",
+              "HMAC-SHA512",
+              "SHA-256",
+              "SHA-512",
+              "SNTRUP761-X25519",
+              "UMAC",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/doc-signing",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/backup-wrap",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 3072,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/app-data",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "projects/acme-prod/locations/global/keyRings/prod/cryptoKeys/pq-signing",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ML-DSA-65"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "adversarial",
+          "source": "cloud",
+          "asset": "https://acme-vault.vault.azure.net/keys/api-signing/1f2e3d4c5b6a",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        }
+      ],
+      "unexpected": [],
+      "decoys": [
+        {
+          "file": "decoys/changelog.js",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/AuditLog.java",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/hashing_shim.py",
+          "ok": true,
+          "false_findings": []
+        },
+        {
+          "file": "decoys/build.go",
+          "ok": true,
+          "false_findings": []
+        }
+      ],
+      "pcap_setups": []
+    },
+    "sample-infra": {
+      "dataset": "sample-infra",
+      "root": "tests/fixtures/sample-infra",
+      "files": {
+        "code": 2,
+        "manifest": 5,
+        "cert": 4,
+        "config": 7
+      },
+      "all": {
+        "assets": 19,
+        "detection": {
+          "found": 19,
+          "false_assets": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "algorithms": {
+          "tp": 41,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "verdict": {
+          "correct": 19,
+          "accuracy": 1.0,
+          "confusion": {
+            "CRITICAL": {
+              "CRITICAL": 9
+            },
+            "INFO": {
+              "INFO": 7
+            },
+            "PLAINTEXT": {
+              "PLAINTEXT": 1
+            },
+            "SAFE": {
+              "SAFE": 2
+            }
+          }
+        },
+        "hndl": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0,
+          "tn": 13,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "key_sizes": {
+          "ok": 3,
+          "total": 3,
+          "accuracy": 1.0
+        },
+        "flags": {
+          "ok": 0,
+          "total": 0,
+          "accuracy": null
+        }
+      },
+      "by_source": {
+        "code": {
+          "assets": 7,
+          "detection": {
+            "found": 7,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 7,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 2
+              },
+              "INFO": {
+                "INFO": 5
+              }
+            }
+          },
+          "hndl": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "tn": 5,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 1,
+            "total": 1,
+            "accuracy": 1.0
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        },
+        "config": {
+          "assets": 12,
+          "detection": {
+            "found": 12,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 35,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 12,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 7
+              },
+              "INFO": {
+                "INFO": 2
+              },
+              "PLAINTEXT": {
+                "PLAINTEXT": 1
+              },
+              "SAFE": {
+                "SAFE": 2
+              }
+            }
+          },
+          "hndl": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 0,
+            "tn": 8,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 2,
+            "total": 2,
+            "accuracy": 1.0
+          },
+          "flags": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          }
+        }
+      },
+      "rows": [
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "api.example.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "3DES",
+              "AES",
+              "ECC",
+              "HMAC-SHA1",
+              "RC4",
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "vault.example.lab:443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ChaCha20-Poly1305",
+              "SHA-256",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "shop.example.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": null,
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "www.example.lab:80",
+          "found": true,
+          "tier_true": "INFO",
+          "tier_pred": "INFO",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "shop.example.lab:80",
+          "found": true,
+          "tier_true": "INFO",
+          "tier_pred": "INFO",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "intranet.example.lab:8080",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "ssh/sshd_config",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ChaCha20-Poly1305",
+              "DH",
+              "Ed25519",
+              "HMAC-SHA1",
+              "HMAC-SHA256",
+              "MLKEM768-X25519-SSH",
+              "RSA",
+              "SHA-1",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "ssh/ssh_config [Host legacy-router]",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "3DES",
+              "DH",
+              "DSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "certs/legacy-sha1.crt",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 1024,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "nginx/certs/api.pem",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC",
+              "RSA",
+              "SHA-256",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 2048,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "nginx/certs/vault-mldsa.pem",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ML-DSA-65"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "config",
+          "asset": "ssh/ssh_host_ed25519_key.pub",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "Ed25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "code",
+          "asset": "app-python/app.py",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": null,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "ECC",
+              "SHA-256",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 128,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "code",
+          "asset": "app-go/main.go",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "code",
+          "asset": "app-python/requirements.txt",
+          "found": true,
+          "tier_true": "INFO",
+          "tier_pred": "INFO",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "code",
+          "asset": "app-go/go.mod",
+          "found": true,
+          "tier_true": "INFO",
+          "tier_pred": "INFO",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "code",
+          "asset": "app-js/package.json",
+          "found": true,
+          "tier_true": "INFO",
+          "tier_pred": "INFO",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "code",
+          "asset": "app-java/pom.xml",
+          "found": true,
+          "tier_true": "INFO",
+          "tier_pred": "INFO",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "sample-infra",
+          "source": "code",
+          "asset": "app-rust/Cargo.toml",
+          "found": true,
+          "tier_true": "INFO",
+          "tier_pred": "INFO",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        }
+      ],
+      "unexpected": [],
+      "decoys": [],
+      "pcap_setups": [],
+      "libraries": {
+        "tp": [
+          "@noble/post-quantum",
+          "crypto-js",
+          "cryptography",
+          "github.com/cloudflare/circl",
+          "golang.org/x/crypto",
+          "io.jsonwebtoken:jjwt-api",
+          "jsonwebtoken",
+          "liboqs-python",
+          "ml-kem",
+          "org.bouncycastle:bcprov-jdk15on",
+          "org.bouncycastle:bcprov-jdk18on",
+          "pycrypto",
+          "pycryptodome",
+          "ring",
+          "rustls",
+          "stdlib"
+        ],
+        "fp": [],
+        "fn": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "not_libraries_reported": []
+      }
+    },
+    "kit": {
+      "dataset": "kit",
+      "root": "../JunctionX-QuantumTrace",
+      "files": {
+        "cloud": 3,
+        "code": 24,
+        "manifest": 2,
+        "pcap": 1
+      },
+      "all": {
+        "assets": 181,
+        "detection": {
+          "found": 181,
+          "false_assets": 0,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "algorithms": {
+          "tp": 473,
+          "fp": 0,
+          "fn": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "verdict": {
+          "correct": 181,
+          "accuracy": 1.0,
+          "confusion": {
+            "CRITICAL": {
+              "CRITICAL": 136
+            },
+            "INFO": {
+              "INFO": 1
+            },
+            "MEDIUM": {
+              "MEDIUM": 9
+            },
+            "PLAINTEXT": {
+              "PLAINTEXT": 15
+            },
+            "SAFE": {
+              "SAFE": 20
+            }
+          }
+        },
+        "hndl": {
+          "tp": 120,
+          "fp": 0,
+          "fn": 0,
+          "tn": 61,
+          "precision": 1.0,
+          "recall": 1.0
+        },
+        "key_sizes": {
+          "ok": 9,
+          "total": 9,
+          "accuracy": 1.0
+        },
+        "flags": {
+          "ok": 122,
+          "total": 122,
+          "accuracy": 1.0
+        }
+      },
+      "by_source": {
+        "network": {
+          "assets": 135,
+          "detection": {
+            "found": 135,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 411,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 135,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 114
+              },
+              "PLAINTEXT": {
+                "PLAINTEXT": 14
+              },
+              "SAFE": {
+                "SAFE": 7
+              }
+            }
+          },
+          "hndl": {
+            "tp": 114,
+            "fp": 0,
+            "fn": 0,
+            "tn": 21,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          },
+          "flags": {
+            "ok": 75,
+            "total": 75,
+            "accuracy": 1.0
+          }
+        },
+        "code": {
+          "assets": 24,
+          "detection": {
+            "found": 24,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 36,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 24,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 6
+              },
+              "MEDIUM": {
+                "MEDIUM": 9
+              },
+              "SAFE": {
+                "SAFE": 9
+              }
+            }
+          },
+          "hndl": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 0,
+            "tn": 24,
+            "precision": null,
+            "recall": null
+          },
+          "key_sizes": {
+            "ok": 9,
+            "total": 9,
+            "accuracy": 1.0
+          },
+          "flags": {
+            "ok": 26,
+            "total": 26,
+            "accuracy": 1.0
+          }
+        },
+        "cloud": {
+          "assets": 22,
+          "detection": {
+            "found": 22,
+            "false_assets": 0,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "algorithms": {
+            "tp": 26,
+            "fp": 0,
+            "fn": 0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          },
+          "verdict": {
+            "correct": 22,
+            "accuracy": 1.0,
+            "confusion": {
+              "CRITICAL": {
+                "CRITICAL": 16
+              },
+              "INFO": {
+                "INFO": 1
+              },
+              "PLAINTEXT": {
+                "PLAINTEXT": 1
+              },
+              "SAFE": {
+                "SAFE": 4
+              }
+            }
+          },
+          "hndl": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "tn": 16,
+            "precision": 1.0,
+            "recall": 1.0
+          },
+          "key_sizes": {
+            "ok": 0,
+            "total": 0,
+            "accuracy": null
+          },
+          "flags": {
+            "ok": 21,
+            "total": 21,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "rows": [
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/python/report_export.py",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "INSECURE-RNG"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 128,
+              "ok": true
+            }
+          ],
+          "flags": [
+            {
+              "flag": "hardcoded-key",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "insecure-mode",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "weak-rng",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/java/BatchExporter.java",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "INSECURE-RNG"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 128,
+              "ok": true
+            }
+          ],
+          "flags": [
+            {
+              "flag": "hardcoded-key",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "insecure-mode",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "weak-rng",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/go/batch-pipeline/main.go",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "INSECURE-RNG"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 128,
+              "ok": true
+            }
+          ],
+          "flags": [
+            {
+              "flag": "hand-rolled-mode",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "hardcoded-key",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "insecure-mode",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "weak-rng",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/python/artifact_manifest.py",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "HMAC-SHA256",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/java/ConfigSync.java",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "HMAC-SHA256",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/go/config-sync/main.go",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "HMAC-SHA256",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/python/legacy_accounts.py",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "MD5"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "password-hash",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/java/CustomerDirectory.java",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "MD5"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "password-hash",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/go/member-directory/main.go",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "MD5"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "password-hash",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/python/webhook_signature.py",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "Ed25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/java/DeviceAttestation.java",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "Ed25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/go/agent-enrollment/main.go",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "Ed25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/python/member_credentials.py",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "PBKDF2",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/java/IdentityVault.java",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "HMAC-SHA256",
+              "PBKDF2"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/go/auth-gateway/main.go",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "HMAC-SHA256",
+              "PBKDF2"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "hand-rolled-kdf",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/python/license_token.py",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 1024,
+              "ok": true
+            }
+          ],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "weak-key-size",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/java/ReceiptSigner.java",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 1024,
+              "ok": true
+            }
+          ],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "weak-key-size",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/go/invoice-service/main.go",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "RSA",
+              "bits": 1024,
+              "ok": true
+            }
+          ],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "weak-key-size",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/python/secure_transfer.py",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/java/SessionCipher.java",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/go/telemetry-relay/main.go",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [
+            {
+              "family": "AES",
+              "bits": 256,
+              "ok": true
+            }
+          ],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/python/update_feed.py",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/java/PatchFeed.java",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "code",
+          "asset": "sample-repos/go/release-feed/main.go",
+          "found": true,
+          "tier_true": "MEDIUM",
+          "tier_pred": "MEDIUM",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/licensing-jwt-signing",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/device-attestation",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/partner-feed-decrypt",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/s3-object-encryption",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/ebs-volume-encryption",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "rotation-disabled",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/internal-ca-root",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "long-lived",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/legacy-reports-export",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "pending-deletion",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "rotation-disabled",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/hsm-backed-settlement",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/release-codesigning",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "long-lived",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "alias/session-token-encryption",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "www.example.com",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "expiring-soon",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "admin.internal.example.com",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "api.example.com",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-256"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "partner-api.example.com",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ECC",
+              "SHA-384"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "legacy-tcp.internal.example.com",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "expired",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "imported",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "renewal-ineligible",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "public-web-alb:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": null,
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "deprecated",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "tls1.0-enabled",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "tls1.1-enabled",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "classically-broken",
+              "expect": false,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "public-web-alb:80",
+          "found": true,
+          "tier_true": "INFO",
+          "tier_pred": "INFO",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "redirect-to-https",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "internal-admin-alb:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": null,
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            },
+            {
+              "flag": "tls1.1-enabled",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "api-gateway-alb:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": null,
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": false,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "partner-api-alb:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": null,
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": false,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "legacy-tcp-nlb:8443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": null,
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "cloud",
+          "asset": "batch-internal-alb:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.11:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.121:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.131:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.132:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.136:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.13:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.140:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.142:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.19:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.23:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.29:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.46:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.49:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.60:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.61:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.63:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.64:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.69:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.70:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.74:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.81:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.86:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.87:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "ChaCha20-Poly1305",
+              "RSA",
+              "SHA-256",
+              "SHA-512",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "192.0.2.96:22",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "DH",
+              "HMAC-SHA1",
+              "RSA",
+              "SHA-1"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "classically-broken",
+              "expect": true,
+              "ok": true
+            }
+          ],
+          "offered": {
+            "expected": [
+              "3DES",
+              "DH",
+              "SHA-1"
+            ],
+            "missing": []
+          }
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app01.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app02.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app03.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app04.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app05.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app06.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app07.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app08.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app09.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app10.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app11.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app12.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app13.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app14.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app15.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app16.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app17.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "app18.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "db01.lab:5432",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "db02.lab:5432",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "db03.lab:5432",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "db04.lab:5432",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "db05.lab:5432",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "db06.lab:5432",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "db07.lab:5432",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "db08.lab:5432",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc01.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc02.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc03.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc04.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc05.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc06.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc07.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc08.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc09.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "dc10.lab:636",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet01.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet02.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet03.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet04.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet05.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet06.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet07.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet08.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet09.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet10.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet11.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet12.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet13.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "intranet14.lab:80",
+          "found": true,
+          "tier_true": "PLAINTEXT",
+          "tier_pred": "PLAINTEXT",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail01.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail01.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail02.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail02.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail03.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail03.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail04.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail04.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail05.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail05.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail06.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail06.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail07.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail07.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail08.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail08.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail09.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail09.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail10.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail10.lab:993",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-256",
+              "X25519"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": []
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "mail11.lab:587",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "vault01.lab:443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "hybrid",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "vault02.lab:443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "hybrid",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "vault03.lab:443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "hybrid",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "vault04.lab:443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "hybrid",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "vault05.lab:443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "hybrid",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "vault06.lab:443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "hybrid",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "vault07.lab:443",
+          "found": true,
+          "tier_true": "SAFE",
+          "tier_pred": "SAFE",
+          "hndl_true": false,
+          "hndl_pred": false,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "SHA-384",
+              "X25519MLKEM768"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "hybrid",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web02.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web03.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web04.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web05.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web06.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web07.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web08.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web09.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web10.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web11.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web12.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web13.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web14.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web15.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web16.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web17.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web18.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web19.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web20.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web22.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web23.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web24.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web25.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web26.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web28.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web29.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web30.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web32.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web33.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web34.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web35.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web36.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        },
+        {
+          "dataset": "kit",
+          "source": "network",
+          "asset": "web37.lab:443",
+          "found": true,
+          "tier_true": "CRITICAL",
+          "tier_pred": "CRITICAL",
+          "hndl_true": true,
+          "hndl_pred": true,
+          "tier_ok": true,
+          "families": {
+            "tp": [
+              "AES",
+              "HMAC-SHA1",
+              "RSA"
+            ],
+            "fn": [],
+            "fp": []
+          },
+          "key_sizes": [],
+          "flags": [
+            {
+              "flag": "no-forward-secrecy",
+              "expect": true,
+              "ok": true
+            }
+          ]
+        }
+      ],
+      "unexpected": [],
+      "decoys": [],
+      "pcap_setups": [
+        {
+          "setup": "tls12-static-rsa",
+          "sessions": 54,
+          "assigned": 54,
+          "ports_expected": {
+            "443": 33,
+            "587": 11,
+            "636": 10
+          },
+          "ports_found": {
+            "443": 33,
+            "587": 11,
+            "636": 10
+          },
+          "ok": true
+        },
+        {
+          "setup": "tls13-x25519",
+          "sessions": 36,
+          "assigned": 36,
+          "ports_expected": {
+            "443": 18,
+            "993": 10,
+            "5432": 8
+          },
+          "ports_found": {
+            "443": 18,
+            "993": 10,
+            "5432": 8
+          },
+          "ok": true
+        },
+        {
+          "setup": "tls13-hybrid-pq",
+          "sessions": 7,
+          "assigned": 7,
+          "ports_expected": {
+            "443": 7
+          },
+          "ports_found": {
+            "443": 7
+          },
+          "ok": true
+        },
+        {
+          "setup": "ssh-legacy",
+          "sessions": 14,
+          "assigned": 14,
+          "ports_expected": {
+            "22": 14
+          },
+          "ports_found": {
+            "22": 14
+          },
+          "ok": true
+        },
+        {
+          "setup": "ssh-modern",
+          "sessions": 10,
+          "assigned": 10,
+          "ports_expected": {
+            "22": 10
+          },
+          "ports_found": {
+            "22": 10
+          },
+          "ok": true
+        },
+        {
+          "setup": "http-plaintext",
+          "sessions": 14,
+          "assigned": 14,
+          "ports_expected": {
+            "80": 14
+          },
+          "ports_found": {
+            "80": 14
+          },
+          "ok": true
+        }
+      ],
+      "libraries": {
+        "tp": [
+          "cryptography",
+          "stdlib"
+        ],
+        "fp": [],
+        "fn": [],
+        "precision": 1.0,
+        "recall": 1.0,
+        "not_libraries_reported": []
+      }
+    }
+  },
+  "skipped": {},
+  "classification": {
+    "cases": 85,
+    "accuracy": {
+      "tier": 1.0,
+      "threat": 1.0,
+      "hndl": 1.0
+    },
+    "all_correct": 85,
+    "misses": []
+  },
+  "by_source": {
+    "network": {
+      "assets": 135,
+      "detection": {
+        "found": 135,
+        "false_assets": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "algorithms": {
+        "tp": 411,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "verdict": {
+        "correct": 135,
+        "accuracy": 1.0,
+        "confusion": {
+          "CRITICAL": {
+            "CRITICAL": 114
+          },
+          "PLAINTEXT": {
+            "PLAINTEXT": 14
+          },
+          "SAFE": {
+            "SAFE": 7
+          }
+        }
+      },
+      "hndl": {
+        "tp": 114,
+        "fp": 0,
+        "fn": 0,
+        "tn": 21,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "key_sizes": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      },
+      "flags": {
+        "ok": 75,
+        "total": 75,
+        "accuracy": 1.0
+      }
+    },
+    "code": {
+      "assets": 39,
+      "detection": {
+        "found": 39,
+        "false_assets": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "algorithms": {
+        "tp": 85,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "verdict": {
+        "correct": 39,
+        "accuracy": 1.0,
+        "confusion": {
+          "CRITICAL": {
+            "CRITICAL": 15
+          },
+          "INFO": {
+            "INFO": 5
+          },
+          "MEDIUM": {
+            "MEDIUM": 10
+          },
+          "SAFE": {
+            "SAFE": 9
+          }
+        }
+      },
+      "hndl": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 0,
+        "tn": 32,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "key_sizes": {
+        "ok": 18,
+        "total": 18,
+        "accuracy": 1.0
+      },
+      "flags": {
+        "ok": 26,
+        "total": 26,
+        "accuracy": 1.0
+      }
+    },
+    "cloud": {
+      "assets": 27,
+      "detection": {
+        "found": 27,
+        "false_assets": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "algorithms": {
+        "tp": 33,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "verdict": {
+        "correct": 27,
+        "accuracy": 1.0,
+        "confusion": {
+          "CRITICAL": {
+            "CRITICAL": 19
+          },
+          "INFO": {
+            "INFO": 1
+          },
+          "PLAINTEXT": {
+            "PLAINTEXT": 1
+          },
+          "SAFE": {
+            "SAFE": 6
+          }
+        }
+      },
+      "hndl": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0,
+        "tn": 20,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "key_sizes": {
+        "ok": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "flags": {
+        "ok": 21,
+        "total": 21,
+        "accuracy": 1.0
+      }
+    },
+    "config": {
+      "assets": 16,
+      "detection": {
+        "found": 16,
+        "false_assets": 0,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "algorithms": {
+        "tp": 58,
+        "fp": 0,
+        "fn": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "verdict": {
+        "correct": 16,
+        "accuracy": 1.0,
+        "confusion": {
+          "CRITICAL": {
+            "CRITICAL": 10
+          },
+          "INFO": {
+            "INFO": 2
+          },
+          "PLAINTEXT": {
+            "PLAINTEXT": 1
+          },
+          "SAFE": {
+            "SAFE": 3
+          }
+        }
+      },
+      "hndl": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0,
+        "tn": 9,
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "key_sizes": {
+        "ok": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "flags": {
+        "ok": 0,
+        "total": 0,
+        "accuracy": null
+      }
+    }
+  },
+  "all": {
+    "assets": 217,
+    "detection": {
+      "found": 217,
+      "false_assets": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "algorithms": {
+      "tp": 587,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "verdict": {
+      "correct": 217,
+      "accuracy": 1.0,
+      "confusion": {
+        "CRITICAL": {
+          "CRITICAL": 158
+        },
+        "INFO": {
+          "INFO": 8
+        },
+        "MEDIUM": {
+          "MEDIUM": 10
+        },
+        "PLAINTEXT": {
+          "PLAINTEXT": 16
+        },
+        "SAFE": {
+          "SAFE": 25
+        }
+      }
+    },
+    "hndl": {
+      "tp": 134,
+      "fp": 0,
+      "fn": 0,
+      "tn": 82,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "key_sizes": {
+      "ok": 22,
+      "total": 22,
+      "accuracy": 1.0
+    },
+    "flags": {
+      "ok": 122,
+      "total": 122,
+      "accuracy": 1.0
+    }
+  }
+}

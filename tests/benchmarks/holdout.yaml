@@ -1,0 +1,42 @@
+# HOLD-OUT benchmark: files written for Phase 5 and labelled by reading them, BEFORE QuantumTrace
+# was ever run on them (2026-10-11). Styled after the lab files the kit README mentions but does
+# not ship (auth_service.py, PaymentProcessor.java, an Apache config) plus a Go and a JS file.
+#
+#   tier / hndl   the verdict a human auditor gives the asset
+#   algorithms    every cryptographic algorithm really USED in the asset (raw names, any spelling);
+#                 compared as algorithm families (RSA, ECC, AES, SHA-256, HMAC-SHA1, ML-KEM-768 ...)
+#   key_sizes     key sizes that must be reported
+# Decoys: files full of crypto WORDS (comments, strings, look-alike names) but no cryptography.
+# Any non-INFO finding in a decoy is a false positive.
+dataset: holdout
+root: holdout
+assets:
+  - asset: python/auth_service.py
+    source: code
+    tier: CRITICAL          # RSA-2048 token signatures (Shor)
+    hndl: false             # signing only; the session cipher is symmetric
+    algorithms: [RSA, SHA-256, PBKDF2WithHmacSHA256, AES]
+    key_sizes: {RSA: 2048, AES: 128}
+  - asset: java/PaymentProcessor.java
+    source: code
+    tier: CRITICAL
+    hndl: true              # card numbers encrypted with RSA PKCS#1: recordable now, decryptable later
+    algorithms: [RSA, SHA-256, HmacSHA1]
+    key_sizes: {RSA: 2048}
+  - asset: go/token-service/main.go
+    source: code
+    tier: CRITICAL          # ECDSA P-384 signatures
+    hndl: false             # payload key comes from ML-KEM-768, payload is AES-256-GCM
+    algorithms: [P-384, SHA-512, ML-KEM-768, AES]
+    key_sizes: {AES: 256}
+  - asset: js/crypto-utils.js
+    source: code
+    tier: MEDIUM            # MD5 (broken), AES-128-CBC, SHA-256
+    hndl: false
+    algorithms: [MD5, SHA-256, AES]
+  - asset: billing.example.lab:443
+    source: config
+    tier: CRITICAL
+    hndl: true              # TLS 1.2 with ECDHE (secp384r1) and static-RSA key exchange
+    algorithms: [ECDHE-RSA-AES256-GCM-SHA384, AES256-SHA, secp384r1]
+decoys: [decoys/report_utils.py, decoys/Notes.java, decoys/notes.go, decoys/settings.json, decoys/menu.js]

@@ -1,0 +1,8 @@
+# Old partner API: static-RSA and 3DES/RC4 suites kept "for compatibility"
+server {
+    listen 443 ssl;
+    server_name api.example.lab;
+    ssl_ciphers "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:AES128-SHA:DES-CBC3-SHA:RC4-SHA";
+    ssl_certificate     /etc/nginx/certs/api.pem;
+    ssl_certificate_key /etc/nginx/certs/api.key;
+}

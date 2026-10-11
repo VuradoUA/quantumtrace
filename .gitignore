@@ -1,0 +1,11 @@
+# build / test artefacts
+*.egg-info/
+.pytest_cache/
+__pycache__/
+build/
+dist/
+.venv/
+
+# generated scan output
+report/
+

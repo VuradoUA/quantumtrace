@@ -1,0 +1,11 @@
+{
+  "attributes": {"enabled": true, "created": "2025-05-04T11:22:33+00:00", "recoveryLevel": "Recoverable"},
+  "key": {
+    "kid": "https://acme-vault.vault.azure.net/keys/api-signing/1f2e3d4c5b6a",
+    "kty": "EC",
+    "crv": "P-384",
+    "keyOps": ["sign", "verify"]
+  },
+  "managed": null,
+  "tags": {"team": "platform"}
+}

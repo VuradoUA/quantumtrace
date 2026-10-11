@@ -1,0 +1,2 @@
+{"loadBalancing": {"algorithm": "round-robin", "hash": "consistent"},
+ "logging": {"cipher_notes": "TLS handled by the proxy", "signature": "Ops team"}}

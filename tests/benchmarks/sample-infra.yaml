@@ -1,0 +1,38 @@
+# Sample-infrastructure benchmark: tests/fixtures/sample-infra (configs, certificates, keys, manifests),
+# labelled by reading each file. Same meaning as holdout.yaml. `algorithms: null` = verdict only
+# (the cipher list is an OpenSSL alias such as HIGH:!aNULL whose expansion depends on the OpenSSL build).
+# `hndl: null` = not decidable from the file (e.g. a key is generated but its use is not visible).
+dataset: sample-infra
+root: ../fixtures/sample-infra
+assets:
+  - {asset: api.example.lab:443, source: config, tier: CRITICAL, hndl: true,
+     algorithms: [ECDHE-RSA-AES128-GCM-SHA256, AES128-SHA, DES-CBC3-SHA, RC4-SHA, ECDHE]}   # ECDSA suite unusable: RSA cert
+  - {asset: vault.example.lab:443, source: config, tier: SAFE, hndl: false,
+     algorithms: [TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256, X25519MLKEM768]}
+  - {asset: shop.example.lab:443, source: config, tier: CRITICAL, hndl: true, algorithms: null}
+  - {asset: www.example.lab:80, source: config, tier: INFO, hndl: false, algorithms: []}          # redirect only
+  - {asset: shop.example.lab:80, source: config, tier: INFO, hndl: false, algorithms: []}
+  - {asset: intranet.example.lab:8080, source: config, tier: PLAINTEXT, hndl: false, algorithms: []}
+  - {asset: ssh/sshd_config, source: config, tier: CRITICAL, hndl: true,
+     algorithms: [mlkem768x25519-sha256, curve25519-sha256, diffie-hellman-group14-sha1, chacha20-poly1305@openssh.com,
+                  aes256-gcm@openssh.com, aes128-cbc, hmac-sha2-256-etm@openssh.com, hmac-sha1, ssh-rsa, Ed25519]}
+  - {asset: "ssh/ssh_config [Host legacy-router]", source: config, tier: CRITICAL, hndl: true,
+     algorithms: [diffie-hellman-group1-sha1, 3des-cbc, ssh-dss]}
+  - {asset: certs/legacy-sha1.crt, source: config, tier: CRITICAL, hndl: false, algorithms: [RSA, SHA1withRSA],
+     key_sizes: {RSA: 1024}}
+  - {asset: nginx/certs/api.pem, source: config, tier: CRITICAL, hndl: false,
+     algorithms: [RSA, SHA256withECDSA, secp384r1, SHA384withECDSA], key_sizes: {RSA: 2048}}
+  - {asset: nginx/certs/vault-mldsa.pem, source: config, tier: SAFE, hndl: false, algorithms: [ML-DSA-65]}
+  - {asset: ssh/ssh_host_ed25519_key.pub, source: config, tier: CRITICAL, hndl: false, algorithms: [Ed25519]}
+  - {asset: app-python/app.py, source: code, tier: CRITICAL, hndl: null,
+     algorithms: [secp256r1, SHA-256, AES, secp384r1, SHA384withECDSA], key_sizes: {AES: 128}}
+  - {asset: app-go/main.go, source: code, tier: CRITICAL, hndl: true, algorithms: [X25519, ChaCha20-Poly1305]}
+  - {asset: app-python/requirements.txt, source: code, tier: INFO, hndl: false, algorithms: []}
+  - {asset: app-go/go.mod, source: code, tier: INFO, hndl: false, algorithms: []}
+  - {asset: app-js/package.json, source: code, tier: INFO, hndl: false, algorithms: []}
+  - {asset: app-java/pom.xml, source: code, tier: INFO, hndl: false, algorithms: []}
+  - {asset: app-rust/Cargo.toml, source: code, tier: INFO, hndl: false, algorithms: []}
+libraries: [cryptography, pycryptodome, pycrypto, liboqs-python, stdlib, golang.org/x/crypto, github.com/cloudflare/circl,
+            crypto-js, "@noble/post-quantum", jsonwebtoken, "org.bouncycastle:bcprov-jdk15on",
+            "org.bouncycastle:bcprov-jdk18on", "io.jsonwebtoken:jjwt-api", ring, rustls, ml-kem]
+not_libraries: [requests, express, serde, "org.slf4j:slf4j-api", golang.org/x/sys]
